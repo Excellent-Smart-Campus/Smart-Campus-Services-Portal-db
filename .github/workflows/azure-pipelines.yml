@@ -32,7 +32,7 @@ jobs:
       run: msbuild ${{ env.solution }} /p:Configuration=${{ env.buildConfiguration }} /p:Platform="${{ env.buildPlatform }}"
 
     - name: Upload .dacpac Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: sql-dacpac
         path: '**/bin/${{ env.BUILD_CONFIGURATION }}/*.dacpac'

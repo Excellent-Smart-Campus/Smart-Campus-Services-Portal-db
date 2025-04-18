@@ -43,7 +43,7 @@ jobs:
       
     - name: Execute MSBuild
       run: |
-        msbuild smart-campus-portal-db/smart-campus-portal-db.sqlproj /t:Build /p:Configuration=Release /p:SqlPackageFilePath="${{ steps.find_sqlpackage.outputs.SQLPACKAGE_PATH }}" /p:TargetDACPac="output/SmartCampusServiceDB.dacpac"
+        msbuild smart-campus-portal-db/smart-campus-portal-db.sqlproj /t:Rebuild /p:Configuration=Release /p:TargetDacPac="output/SmartCampusServiceDB.dacpac"
       shell: cmd
       
     - name: Upload artifact

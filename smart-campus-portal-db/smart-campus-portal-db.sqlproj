@@ -52,10 +52,11 @@
         <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
     </PropertyGroup>
     <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+    <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
     <ItemGroup>
-        <Folder Include="edu\Stored Procedures\" />
         <Folder Include="Properties" />
         <Folder Include="Security" />
+        <Folder Include="sh" />
         <Folder Include="sh\Tables" />
         <Folder Include="edu" />
         <Folder Include="edu\Tables" />
@@ -65,6 +66,7 @@
         <Folder Include="svc\Tables" />
         <Folder Include="usr" />
         <Folder Include="usr\Tables" />
+        <Folder Include="sh\Stored Procedures" />
         <Folder Include="edu\Stored Procedures" />
         <Folder Include="ntf\Stored Procedures" />
         <Folder Include="svc\Stored Procedures" />
@@ -76,6 +78,11 @@
     <ItemGroup>
         <Build Include="Security\ApiRole.sql" />
         <Build Include="Security\sh.sql" />
+        <Build Include="Security\edu.sql" />
+        <Build Include="Security\ntf.sql" />
+        <Build Include="Security\svc.sql" />
+        <Build Include="Security\usr.sql" />
+
         <Build Include="sh\Indexes\IX_StakeholderRelationship_RelatedStakeholder.sql" />
         <Build Include="sh\Indexes\IX_StakeholderRelationship_Stakeholder.sql" />
         <Build Include="sh\Store Procedures\GetStakeholder.sql" />
@@ -90,21 +97,17 @@
         <Build Include="sh\Tables\StakeholderType.sql" />
         <Build Include="sh\Tables\Contact.sql" />
         <Build Include="sh\Tables\ContactType.sql" />
-        <Build Include="Security\edu.sql" />
         <Build Include="edu\Tables\DayOfWeekType.sql" />
         <Build Include="edu\Tables\StudentSubject.sql" />
         <Build Include="edu\Tables\StudentTimetable.sql" />
         <Build Include="edu\Tables\Subject.sql" />
-        <Build Include="Security\ntf.sql" />
         <Build Include="ntf\Tables\Notification.sql" />
         <Build Include="ntf\Tables\NotificationView.sql" />
-        <Build Include="Security\svc.sql" />
         <Build Include="svc\Tables\Booking.sql" />
         <Build Include="svc\Tables\BookingParticipant.sql" />
         <Build Include="svc\Tables\MaintenanceIssue.sql" />
         <Build Include="svc\Tables\Room.sql" />
         <Build Include="svc\Tables\Status.sql" />
-        <Build Include="Security\usr.sql" />
         <Build Include="usr\Tables\User.sql" />
         <Build Include="usr\Tables\Action.sql" />
         <Build Include="usr\Tables\ActionLog.sql" />
@@ -124,5 +127,8 @@
         <Build Include="usr\Stored Procedures\SetGroupAction.sql" />
         <Build Include="usr\Stored Procedures\SetGroupMember.sql" />
         <Build Include="usr\Stored Procedures\SetSecurityUser.sql" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="System" />
     </ItemGroup>
 </Project>

@@ -18,10 +18,14 @@ jobs:
       with:
         msbuild-version: 'latest'
 
-    - name: Install DataBuildTools
+    - name: Download Visual Studio Build Tools Installer
       run: |
-        Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/24ca3ca9-734f-49a7-9a7a-1f542552262d/b17ba3827ba194f699c9957322c6170f/vs_buildtools.exe" -OutFile "vs_buildtools.exe"
-        Start-Process -Wait -NoNewWindow -FilePath "vs_buildtools.exe" -ArgumentList "--add Microsoft.VisualStudio.Workload.DataBuildTools --quiet --wait --norestart"
+        Invoke-WebRequest -Uri "https://aka.ms/vs/17/release/vs_buildtools.exe" -OutFile "vs_buildtools.exe"
+      shell: powershell
+
+    - name: Install DataBuildTools Workload
+      run: |
+        Start-Process -Wait -NoNewWindow -FilePath "vs_buildtools.exe" -ArgumentList "--add", "Microsoft.VisualStudio.Workload.DataBuildTools", "--quiet", "--wait", "--norestart"
         Remove-Item "vs_buildtools.exe"
       shell: powershell
 

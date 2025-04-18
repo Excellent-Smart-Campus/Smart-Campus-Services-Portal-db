@@ -17,14 +17,33 @@ jobs:
       uses: microsoft/setup-msbuild@v2
       with:
         msbuild-version: 'latest'
-        
+
+    - name: Install DataBuildTools
+      run: |
+        Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/24ca3ca9-734f-49a7-9a7a-1f542552262d/b17ba3827ba194f699c9957322c6170f/vs_buildtools.exe" -OutFile "vs_buildtools.exe"
+        Start-Process -Wait -NoNewWindow -FilePath "vs_buildtools.exe" -ArgumentList "--add Microsoft.VisualStudio.Workload.DataBuildTools --quiet --wait --norestart"
+        Remove-Item "vs_buildtools.exe"
+      shell: powershell
+
+    - name: Find SqlPackage.exe
+      id: find_sqlpackage
+      run: |
+        $sqlPackagePath = Get-ChildItem -Path "C:\Program Files*\Microsoft SQL Server\*\DAC\bin\SqlPackage.exe", "C:\Program Files (x86)*\Microsoft SQL Server\*\DAC\bin\SqlPackage.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | Select-Object -ExpandProperty FullName
+        if ($sqlPackagePath) {
+          echo "SQLPACKAGE_PATH=$sqlPackagePath" >> $env:GITHUB_OUTPUT
+        } else {
+          echo "Error: SqlPackage.exe not found."
+          exit 1
+        }
+      shell: powershell
+      
     - name: Execute MSBuild
       run: |
-        msbuild smart-campus-portal-db/smart-campus-portal-db.sqlproj /t:Build /p:Configuration=Release /p:DSP="Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider"
+        msbuild smart-campus-portal-db/smart-campus-portal-db.sqlproj /t:Publish /p:Configuration=Release /p:SqlPackageFilePath="${{ steps.find_sqlpackage.outputs.SQLPACKAGE_PATH }}" /p:TargetDACPac="output/SmartCampusServiceDB.dacpac"
       shell: cmd
       
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: SQLDB
-        path: ${{secrets.ARTIFACTS_PATH}}./smart-campus-portal-db/bin/Release/*.dacpac
+        name: SmartCampusServiceDB.dacpac
+        path: output/SmartCampusServiceDB.dacpac

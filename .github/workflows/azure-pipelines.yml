@@ -10,11 +10,6 @@ jobs:
   build:
     name: Build Dacpac
     runs-on: windows-latest
-
-    env:
-      solution: '**/*.sln'
-      buildConfiguration: Release
-      buildPlatform: "Any CPU"
       
     steps:
     - name: Checkout
@@ -24,7 +19,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.3.1
 
     - name: Build DACPAC
-      run: msbuild ${{ env.solution }} /p:Configuration=${{ env.buildConfiguration }} /p:Platform="${{ env.buildPlatform }}" /p:TargetFrameworkVersion=v4.8 /p:DSP=Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider
+      run: msbuild ${{ secrets.PROJECT_PATH }} /p:Configuration=${{ secrets.BUILDCONFIGURATION }} /p:Platform="${{ secrets.BUILDPLATFORM }}" /p:TargetFrameworkVersion=v4.8 /p:DSP=Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider
     
     - name: Upload artifact
       uses: actions/upload-artifact@v4

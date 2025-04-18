@@ -2,9 +2,7 @@ name: Build and Deploy SQL Project to Azure SQL
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -12,16 +10,19 @@ jobs:
     runs-on: windows-latest
       
     steps:
-    - name: Checkout
+    - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.3.1
-
-    - name: Build DACPAC
+      uses: microsoft/setup-msbuild@v2
+      with:
+        msbuild-version: 'latest'
+        
+    - name: Execute MSBuild
       run: |
-        msbuild smart-campus-portal-db/smart-campus-portal-db.sqlproj /t:Build /p:Configuration=Release /p:DSP=Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider
-
+        msbuild smart-campus-portal-db/smart-campus-portal-db.sqlproj /t:Build /p:Configuration=Release /p:DSP="Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider"
+      shell: cmd
+      
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:

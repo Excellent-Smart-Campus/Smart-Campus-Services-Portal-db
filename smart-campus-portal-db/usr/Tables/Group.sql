@@ -1,0 +1,6 @@
+CREATE TABLE [usr].[Group]
+(
+	[GroupId]		INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	[Description]	NVARCHAR(255) NOT NULL,
+	[IsDeleted]		BIT NOT NULL
+)

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <Name>SmartCampusServiceDB</Name>
+        <SchemaVersion>2.0</SchemaVersion>
+        <ProjectVersion>4.1</ProjectVersion>
+        <ProjectGuid>{63365621-7070-4132-955F-2fc82f0e0f9e}</ProjectGuid>
+        <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+        <OutputType>Database</OutputType>
+        <RootPath>
+        </RootPath>
+        <RootNamespace>SmartCampusServiceDB</RootNamespace>
+        <AssemblyName>SmartCampusServiceDB</AssemblyName>
+        <ModelCollation>1033, CI</ModelCollation>
+        <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+        <DeployToDatabase>True</DeployToDatabase>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <TargetLanguage>CS</TargetLanguage>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <SqlServerVerification>False</SqlServerVerification>
+        <IncludeCompositeObjects>True</IncludeCompositeObjects>
+        <TargetDatabaseSet>True</TargetDatabaseSet>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <OutputPath>bin\Release\</OutputPath>
+        <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+        <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <DefineDebug>false</DefineDebug>
+        <DefineTrace>true</DefineTrace>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <OutputPath>bin\Debug\</OutputPath>
+        <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <DefineDebug>true</DefineDebug>
+        <DefineTrace>true</DefineTrace>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup>
+        <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+        <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+        <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+    </PropertyGroup>
+    <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+    <ItemGroup>
+        <Folder Include="edu\Stored Procedures\" />
+        <Folder Include="Properties" />
+        <Folder Include="Security" />
+        <Folder Include="sh\Tables" />
+        <Folder Include="edu" />
+        <Folder Include="edu\Tables" />
+        <Folder Include="ntf" />
+        <Folder Include="ntf\Tables" />
+        <Folder Include="svc" />
+        <Folder Include="svc\Tables" />
+        <Folder Include="usr" />
+        <Folder Include="usr\Tables" />
+        <Folder Include="edu\Stored Procedures" />
+        <Folder Include="ntf\Stored Procedures" />
+        <Folder Include="svc\Stored Procedures" />
+        <Folder Include="usr\Stored Procedures" />
+    </ItemGroup>
+    <ItemGroup>
+        <PostDeploy Include="staticData\PostDeploymentScript.sql" />
+    </ItemGroup>
+    <ItemGroup>
+        <Build Include="Security\ApiRole.sql" />
+        <Build Include="Security\sh.sql" />
+        <Build Include="sh\Indexes\IX_StakeholderRelationship_RelatedStakeholder.sql" />
+        <Build Include="sh\Indexes\IX_StakeholderRelationship_Stakeholder.sql" />
+        <Build Include="sh\Store Procedures\GetStakeholder.sql" />
+        <Build Include="sh\Store Procedures\GetStakeholderContact.sql" />
+        <Build Include="sh\Store Procedures\GetStakeholderRelationship.sql" />
+        <Build Include="sh\Store Procedures\SetStakeholder.sql" />
+        <Build Include="sh\Store Procedures\SetStakeholderContact.sql" />
+        <Build Include="sh\Store Procedures\SetStakeholderRelationship.sql" />
+        <Build Include="sh\Tables\Stakeholder.sql" />
+        <Build Include="sh\Tables\StakeholderRelationship.sql" />
+        <Build Include="sh\Tables\StakeholderRelationshipType.sql" />
+        <Build Include="sh\Tables\StakeholderType.sql" />
+        <Build Include="sh\Tables\Contact.sql" />
+        <Build Include="sh\Tables\ContactType.sql" />
+        <Build Include="Security\edu.sql" />
+        <Build Include="edu\Tables\DayOfWeekType.sql" />
+        <Build Include="edu\Tables\StudentSubject.sql" />
+        <Build Include="edu\Tables\StudentTimetable.sql" />
+        <Build Include="edu\Tables\Subject.sql" />
+        <Build Include="Security\ntf.sql" />
+        <Build Include="ntf\Tables\Notification.sql" />
+        <Build Include="ntf\Tables\NotificationView.sql" />
+        <Build Include="Security\svc.sql" />
+        <Build Include="svc\Tables\Booking.sql" />
+        <Build Include="svc\Tables\BookingParticipant.sql" />
+        <Build Include="svc\Tables\MaintenanceIssue.sql" />
+        <Build Include="svc\Tables\Room.sql" />
+        <Build Include="svc\Tables\Status.sql" />
+        <Build Include="Security\usr.sql" />
+        <Build Include="usr\Tables\User.sql" />
+        <Build Include="usr\Tables\Action.sql" />
+        <Build Include="usr\Tables\ActionLog.sql" />
+        <Build Include="usr\Tables\Group.sql" />
+        <Build Include="usr\Tables\GroupAction.sql" />
+        <Build Include="usr\Tables\GroupMember.sql" />
+        <Build Include="usr\Stored Procedures\DeleteGroup.sql" />
+        <Build Include="usr\Stored Procedures\DeleteGroupAction.sql" />
+        <Build Include="usr\Stored Procedures\DeleteGroupMembership.sql" />
+        <Build Include="usr\Stored Procedures\GetAllActions.sql" />
+        <Build Include="usr\Stored Procedures\GetGroup.sql" />
+        <Build Include="usr\Stored Procedures\GetGroupAction.sql" />
+        <Build Include="usr\Stored Procedures\GetGroupMembership.sql" />
+        <Build Include="usr\Stored Procedures\GetUserGroup.sql" />
+        <Build Include="usr\Stored Procedures\SetActionLog.sql" />
+        <Build Include="usr\Stored Procedures\SetGroup.sql" />
+        <Build Include="usr\Stored Procedures\SetGroupAction.sql" />
+        <Build Include="usr\Stored Procedures\SetGroupMember.sql" />
+        <Build Include="usr\Stored Procedures\SetSecurityUser.sql" />
+    </ItemGroup>
+</Project>

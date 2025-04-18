@@ -1,0 +1,5 @@
+CREATE ROLE [ApiRole]
+
+GO 
+
+GRANT EXECUTE TO [ApiRole]

@@ -7,7 +7,10 @@ SET NOCOUNT ON;
 SELECT 
 	[SH].StakeholderId,
 	[SH].StakeholderTypeId,
-	[SH].Name
+	[SH].FirstName,
+    [SH].LastName,
+    [SH].TitleId
 FROM [sh].Stakeholder [SH]
+INNER JOIN sh.Title [T] ON [T].TitleId = [SH].TitleId
 WHERE (@stakeholderId IS NULL OR [SH].StakeholderId = @stakeholderId) AND (@stakeholderTypeId IS NULL OR [SH].StakeholderTypeId = @stakeholderTypeId)
 AND SH.IsDeleted = 0

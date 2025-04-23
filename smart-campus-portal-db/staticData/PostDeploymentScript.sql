@@ -37,13 +37,44 @@ VALUES (StakeholderTypeId, Description)
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
 
+----- Title
+MERGE INTO sh.Title AS Target 
+USING (VALUES 
+  (1, N'Mr.'),
+  (2, N'Mrs.'),
+  (3, N'Miss'),
+  (4, N'Ms.'),
+  (5, N'Mx. '),
+  (6, N'Dr.'),
+  (7, N'Prof.'),
+  (8, N'Rev.'),
+  (9, N'Sir'),
+  (10,N'Lady'),
+  (11,N'Hon.'),
+  (12,N'Capt.'),
+  (13,N'Major'),
+  (14,N'Col.'),
+  (15,N'Lt.'),
+  (16,N'Sgt.')
+) 
+AS Source (TitleId, Description) 
+ON Target.TitleId = Source.TitleId
+WHEN MATCHED THEN 
+UPDATE SET Description = Source.Description 
+
+WHEN NOT MATCHED BY TARGET THEN 
+INSERT (TitleId, Description) 
+VALUES (TitleId, Description) 
+
+WHEN NOT MATCHED BY SOURCE THEN 
+DELETE;
+
 --- StakeholderRelationshipType
 MERGE INTO sh.StakeholderRelationshipType AS Target
 USING (VALUES
-  (1, N'Teaches'),
-  (2, N'Mentors'),
-  (3, N'Branch'),
-  (4, N'Supervises')
+  (1, N'Mentors'),
+  (2, N'Manage'),
+  (4, N'Supervise')
 )
 AS Source (StakeholderRelationshipTypeId, Description)
 ON Target.StakeholderRelationshipTypeId = Source.StakeholderRelationshipTypeId
@@ -80,7 +111,7 @@ VALUES (DayOfWeekTypeId, Description)
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
 
---Status
+-- Status
 MERGE INTO svc.Status AS Target
 USING (VALUES
   (1, N'Pending'),
@@ -102,6 +133,78 @@ VALUES (StatusId, Description)
 
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
+
+-- subject
+MERGE INTO svc.Subject AS Target
+USING (VALUES
+  (1, N'DTD117V', N'Data Structures And Algorithms'),
+  (2, N'GMD117V', N'Games Engineering'),
+  (3, N'SEC117V', N'Service-Oriented Computing'),
+  (4, N'HMD117V', N'Human Computer Interaction'),
+  (5, N'SFG117V', N'Software Engineering')
+)
+AS Source (SubjectId, SubjectCode, SubjectName)
+ON Target.SubjectId = Source.SubjectId
+
+WHEN MATCHED THEN
+UPDATE SET SubjectCode = Source.SubjectCode,
+          SubjectName = Source.SubjectName
+
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (SubjectId, SubjectCode, SubjectName)
+VALUES (SubjectId, SubjectCode, SubjectName)
+
+WHEN NOT MATCHED BY SOURCE THEN
+DELETE;
+
+-- RoomType
+MERGE INTO svc.RoomType AS Target
+USING (VALUES
+  (1, N'Study Room'),
+  (2, N'Lecture Hall'),
+  (3, N'Lab'),
+  (4, N'Lab'),
+  (5, N'Technical Lab')
+)
+AS Source (RoomTypeId, Description)
+ON Target.RoomTypeId = Source.RoomTypeId
+
+WHEN MATCHED THEN
+UPDATE SET Description = Source.Description
+
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (RoomTypeId, Description)
+VALUES (RoomTypeId, Description)
+
+WHEN NOT MATCHED BY SOURCE THEN
+DELETE;
+
+-- room
+MERGE INTO svc.Room AS Target
+USING (VALUES
+  (1, N'A101', 1, 200, NULL),
+  (2, N'B202', 2, 50, NULL),
+  (3, N'B201', 2, 50, NULL),
+  (4, N'10-G06', 3, 50, NULL),
+  (5, N'10-140', 4, 50, NULL),
+  (6, N'BB01', 5, 25, NULL)
+)
+AS Source (RoomId, RoomNumber, RoomTypeId, Capacity, Location)
+ON Target.RoomId = Source.RoomId
+
+WHEN MATCHED THEN
+UPDATE SET RoomNumber = Source.RoomNumber,
+          RoomTypeId = Source.RoomTypeId,
+          Capacity = Source.Capacity,
+          Location = Source.Location
+
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (RoomId, RoomNumber, RoomTypeId, Capacity, Location)
+VALUES (RoomId, RoomNumber, RoomTypeId, Capacity, Location)
+
+WHEN NOT MATCHED BY SOURCE THEN
+DELETE;
+
 
 -----Action
 MERGE INTO usr.[Action] AS Target 
@@ -161,6 +264,26 @@ VALUES ([ActionId], Description)
 
 WHEN NOT MATCHED BY SOURCE THEN 
 DELETE;
+
+----- Group
+SET IDENTITY_INSERT [usr].[Group] ON;
+MERGE INTO [usr].[Group] AS Target 
+USING (VALUES 
+  (1, N'Super User', 0),
+  (2, N'Students', 0),
+  (3, N'Lecturers', 0)
+) 
+AS Source ([GroupId], [Description], [IsDeleted])
+ON Target.[GroupId] = Source.[GroupId]
+
+WHEN MATCHED THEN 
+UPDATE SET [Description] = Source.[Description]
+
+WHEN NOT MATCHED BY Target THEN 
+INSERT ([GroupId], [Description], [IsDeleted])
+VALUES (Source.[GroupId], Source.[Description], Source.[IsDeleted]);
+
+SET IDENTITY_INSERT [usr].[Group] OFF; 
 
 
 ----- Creating DB Owner and Api USer

@@ -11,6 +11,6 @@ SELECT
     [SH].LastName,
     [SH].TitleId
 FROM [sh].Stakeholder [SH]
-INNER JOIN sh.Title [T] ON [T].TitleId = [SH].TitleId
+INNER JOIN [sh].Title [T] ON [SH].TitleId = [T].TitleId 
 WHERE (@stakeholderId IS NULL OR [SH].StakeholderId = @stakeholderId) AND (@stakeholderTypeId IS NULL OR [SH].StakeholderTypeId = @stakeholderTypeId)
 AND SH.IsDeleted = 0

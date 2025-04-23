@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "smart-campus-portal-db", "smart-campus-portal-db\smart-campus-portal-db.sqlproj", "{63365621-7070-4132-955F-2FC82F0E0F9E}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SmartCampuSportalDB", "SmartCampuSportalDB\SmartCampuSportalDB.sqlproj", "{63365621-7070-4132-955F-2FC82F0E0F9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

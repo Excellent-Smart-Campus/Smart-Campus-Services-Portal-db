@@ -1,7 +1,7 @@
 CREATE TABLE [sh].[Stakeholder] (
     [StakeholderId]         INT IDENTITY (1, 1) NOT NULL,
     [StakeholderTypeId]     INT  NOT NULL,
-    [TitleId]               INT  NOT NULL,
+    [TitleId]               INT NULL,
     [FirstName]             NVARCHAR (255) NOT NULL,
     [LastName]              NVARCHAR (255) NOT NULL,
     [IsDeleted]             BIT NULL DEFAULT 0, 

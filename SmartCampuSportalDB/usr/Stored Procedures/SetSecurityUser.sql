@@ -23,7 +23,9 @@ ELSE
 SELECT
     [U].StakeholderId,
 	[U].Username,
-    [SH].[Name],
+    [SH].FirstName,
+    [SH].LastName,
+    [SH].TitleId,
     [U].PasswordHash,
     [U].SecurityStamp,
     [U].IsDeleted,

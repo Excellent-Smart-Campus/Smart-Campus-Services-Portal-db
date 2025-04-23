@@ -9,3 +9,4 @@ CREATE TABLE [usr].[ActionLog]
 	CONSTRAINT [FK_ActionLog_Action] FOREIGN KEY ([ActionId]) REFERENCES [usr].[Action] ([ActionId]),
 	CONSTRAINT [FK_ActionLog_User] FOREIGN KEY ([StakeholderId]) REFERENCES [usr].[User] ([StakeholderId])
 )
+

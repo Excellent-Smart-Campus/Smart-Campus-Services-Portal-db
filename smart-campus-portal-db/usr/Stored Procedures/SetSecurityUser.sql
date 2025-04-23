@@ -13,7 +13,7 @@ IF EXISTS(SELECT StakeholderId FROM [usr].[User] WHERE StakeholderId = @stakehol
     SET PasswordHash = @passwordHash,
         SecurityStamp = @securityStamp,
         IsDeleted = @isDeleted,
-        IsLocked = @isLocked
+        IsLocked = @isLocked,
         DateUpdated = GETDATE()
     WHERE StakeholderId = @stakeholderId
 ELSE

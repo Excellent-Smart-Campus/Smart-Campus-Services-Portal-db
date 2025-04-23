@@ -16,7 +16,7 @@
         <ModelCollation>1033, CI</ModelCollation>
         <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
         <DeployToDatabase>True</DeployToDatabase>
-        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <TargetLanguage>CS</TargetLanguage>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <SqlServerVerification>False</SqlServerVerification>
@@ -108,6 +108,11 @@
         <Build Include="svc\Tables\MaintenanceIssue.sql" />
         <Build Include="svc\Tables\Room.sql" />
         <Build Include="svc\Tables\Status.sql" />
+        <Build Include="svr\Stored Procedures\SetBooking.sql" />
+        <Build Include="svr\Stored Procedures\GetBooking.sql" />
+        <Build Include="svr\Stored Procedures\GetMaintenanceIssue.sql" />
+        <Build Include="svr\Stored Procedures\SetMaintenanceIssue.sql" />
+        <Build Include="Security\usr.sql" />
         <Build Include="usr\Tables\User.sql" />
         <Build Include="usr\Tables\Action.sql" />
         <Build Include="usr\Tables\ActionLog.sql" />

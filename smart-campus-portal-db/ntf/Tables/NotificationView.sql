@@ -4,6 +4,6 @@ CREATE TABLE [ntf].[NotificationView] (
     [isRead]                    BIT NULL DEFAULT 0,
     [DateCreated]               DATETIME,
     CONSTRAINT [PK_NotificationView] PRIMARY KEY CLUSTERED ([StakeholderId] ASC, [NotificationId] ASC),
-    CONSTRAINT [FK_NotificationView_Notification] FOREIGN KEY ([NotificationId]) REFERENCES [ntf].[Notification] ([NotificationId])
+    CONSTRAINT [FK_NotificationView_Notification] FOREIGN KEY ([NotificationId]) REFERENCES [ntf].[Notification] ([NotificationId]),
     CONSTRAINT [FK_NotificationView_Stakeholder] FOREIGN KEY ([StakeholderId]) REFERENCES [sh].Stakeholder ([StakeholderId])
 );

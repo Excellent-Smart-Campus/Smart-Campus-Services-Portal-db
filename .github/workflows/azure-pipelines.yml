@@ -3,36 +3,38 @@ name: Build DACPAC
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: windows-latest
-    
-    env:
-      solution: '**/*.sln'
-      buildPlatform: 'Any CPU'
-      buildConfiguration: Release
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1
-
-    - name: Restore NuGet packages
-      run: nuget restore "${{ env.solution }}"
+    - name: Install SQL Server Data Tools (SSDT)
+      run: |
+        Invoke-WebRequest -Uri "https://aka.ms/vs/17/release/vs_buildtools.exe" -OutFile "vs_buildtools.exe"
+        Start-Process -Wait -NoNewWindow -FilePath "vs_buildtools.exe" -ArgumentList `
+          "--add", "Microsoft.VisualStudio.Workload.DataBuildTools", `
+          "--quiet", "--norestart", "--wait"
+        Remove-Item "vs_buildtools.exe"
+      shell: powershell
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.3.1
+      uses: microsoft/setup-msbuild@v2
+      with:
+        msbuild-version: 'latest'
 
-    - name: Build solution
-      run: msbuild "${{ env.solution }}" /p:Configuration=${{ env.buildConfiguration }} /p:Platform="${{ env.buildPlatform }}"
-  
+    - name: Build DACPAC using MSBuild
+      run: |
+        msbuild smart-campus-portal-db/smart-campus-portal-db.sqlproj /t:Build /p:Configuration=Release /p:OutputPath=output
+      shell: cmd
+
     - name: Upload DACPAC Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: sql-build-artifacts
-        path: |
-          **/bin/${{ env.buildConfiguration }}/
+        name: SmartCampusServiceDB.dacpac
+        path: output/**/*.dacpac

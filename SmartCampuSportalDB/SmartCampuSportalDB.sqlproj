@@ -58,12 +58,16 @@
         <Folder Include="Security" />
         <Folder Include="sh" />
         <Folder Include="sh\Tables" />
+        <Folder Include="sh\Indexes" />
         <Folder Include="edu" />
         <Folder Include="edu\Tables" />
+        <Folder Include="edu\Indexes" />
         <Folder Include="ntf" />
         <Folder Include="ntf\Tables" />
+        <Folder Include="ntf\Indexes" />
         <Folder Include="svc" />
         <Folder Include="svc\Tables" />
+        <Folder Include="svc\Indexes" />
         <Folder Include="usr" />
         <Folder Include="usr\Tables" />
         <Folder Include="sh\Stored Procedures" />

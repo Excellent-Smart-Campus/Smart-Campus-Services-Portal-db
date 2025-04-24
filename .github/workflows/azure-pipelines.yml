@@ -41,19 +41,10 @@ jobs:
         with:
           name: SQLDB
           path: dacpac
-
-      - name: Install SqlPackage as .NET tool
-        run: |
-          dotnet tool install -g microsoft.sqlpackage
-
-      - name: Add SqlPackage to PATH
-        run: echo "${{ runner.tool_cache }}/dotnet/tools" >> $GITHUB_PATH
-
-      - name: Dev
+      
+      - name: Deploy to Azure SQL
         uses: azure/sql-action@v2
         with:
-          server-name: "${{ secrets.SQL_SERVER }}"
-          database-name: "${{ secrets.SQL_DATABASE }}"  
-          connection-string: "${{ secrets.AZURE_SQL_CONNECTION_STRING }}"
-          path: ${{secrets.ARTIFACTS_PATH}}*.dacpac                   
+          connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }} #  Use the connection string secret
+          path: 'dacpac/*.dacpac' # Path to the DACPAC file(s)
           action: 'Publish'

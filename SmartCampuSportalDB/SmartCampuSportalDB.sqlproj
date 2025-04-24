@@ -105,12 +105,12 @@
         <Build Include="svc\Tables\BookingParticipant.sql" />
         <Build Include="svc\Tables\MaintenanceIssue.sql" />
         <Build Include="svc\Tables\Room.sql" />
+        <Build Include="svc\Tables\RoomType.sql" />
         <Build Include="svc\Tables\Status.sql" />
         <Build Include="svc\Stored Procedures\SetBooking.sql" />
         <Build Include="svc\Stored Procedures\GetBooking.sql" />
         <Build Include="svc\Stored Procedures\GetMaintenanceIssue.sql" />
         <Build Include="svc\Stored Procedures\SetMaintenanceIssue.sql" />
-
         <Build Include="usr\Tables\User.sql" />
         <Build Include="usr\Tables\Action.sql" />
         <Build Include="usr\Tables\ActionLog.sql" />

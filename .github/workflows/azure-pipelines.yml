@@ -49,12 +49,11 @@ jobs:
       - name: Add SqlPackage to PATH
         run: echo "${{ runner.tool_cache }}/dotnet/tools" >> $GITHUB_PATH
 
-      - name: Deploy to Azure SQL
-        run: |
-          sqlpackage\sqlpackage.exe /Action:Publish `
-            /SourceFile:"dacpac\*.dacpac" `
-            /TargetServerName:"${{ secrets.SQL_SERVER }}" `
-            /TargetDatabaseName:"${{ secrets.SQL_DATABASE }}" `
-            /TargetUser:"${{ secrets.SQL_USERNAME }}" `
-            /TargetPassword:"${{ secrets.SQL_PASSWORD }}" `
-            /p:BlockOnPossibleDataLoss=false
+      - name: Dev
+        uses: azure/sql-action@v2
+        with:
+          server-name: "${{ secrets.SQL_SERVER }}"
+          database-name: "${{ secrets.SQL_DATABASE }}"  
+          connection-string: "${{ secrets.AZURE_SQL_CONNECTION_STRING }}"
+          path: ${{secrets.ARTIFACTS_PATH}}*.dacpac                   
+          action: 'Publish'

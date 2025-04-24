@@ -4,4 +4,5 @@ CREATE TABLE [svc].[Room] (
     [RoomTypeId]    INT NOT NULL,
     [Capacity]      INT NOT NULL,
     [Location]      NVARCHAR(255) NULL
+    CONSTRAINT [FK_Room_RoomTypeId] FOREIGN KEY ([RoomTypeId]) REFERENCES [svc].[RoomType] ([RoomTypeId]),
 );

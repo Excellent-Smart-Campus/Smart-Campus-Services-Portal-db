@@ -15,7 +15,7 @@ BEGIN TRY
 		SELECT @description = Description FROM usr.[Action] WHERE ActionId = @actionId
 
 		INSERT INTO usr.[GroupAction] (GroupId, ActionId) VALUES (@groupId, @actionId)
-		INSERT INTO usr.ActionLog (ActionId, KeyId, StakeholderId, ActionDate, Description) VALUES (36, @groupId, @stakeholderId, GETDATE(), @description)
+		INSERT INTO usr.ActionLog (ActionId, KeyId, StakeholderId, ActionDate, Description) VALUES (34, @groupId, @stakeholderId, GETDATE(), @description)
 	END
 	
 	COMMIT TRANSACTION

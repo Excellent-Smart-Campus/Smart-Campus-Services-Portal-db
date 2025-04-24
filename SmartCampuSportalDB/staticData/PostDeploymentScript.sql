@@ -135,6 +135,7 @@ WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
 
 -- subject
+SET IDENTITY_INSERT edu.Subject ON;
 MERGE INTO edu.Subject AS Target
 USING (VALUES
   (1, N'DTD117V', N'Data Structures And Algorithms'),
@@ -156,6 +157,7 @@ VALUES (SubjectId, SubjectCode, SubjectName)
 
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
+SET IDENTITY_INSERT edu.Subject OFF;
 
 -- RoomType
 MERGE INTO svc.RoomType AS Target
@@ -180,6 +182,7 @@ WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
 
 -- room
+SET IDENTITY_INSERT svc.Room ON;
 MERGE INTO svc.Room AS Target
 USING (VALUES
   (1, N'A101', 1, 200, NULL),
@@ -204,7 +207,7 @@ VALUES (RoomId, RoomNumber, RoomTypeId, Capacity, Location)
 
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
-
+SET IDENTITY_INSERT svc.Room OFF;
 
 -----Action
 MERGE INTO usr.[Action] AS Target 
@@ -225,32 +228,30 @@ USING (VALUES
     (14,N'Update Maintenance Issue'),
     (15,N'Close Maintenance Issue'),
     (16,N'View Maintenance Requests'),
-    (17,N'Assign Maintenance Technician'),
-    (18,N'View Announcements'),
-    (19,N'Post Announcement'),
-    (20,N'Edit Announcement'),
+    (17,N'Assign Maintenance Issue'),
+    (18,N'Send Subject Notification'),
+    (19,N'Send General Notification'),
+    (20,N'View Notifications'),
     (21,N'Delete Announcement'),
-    (22,N'Send Notification'),
-    (23,N'Receive Notification'),
-    (24,N'Access Dashboard'),
+    (22,N'Mark Notification as Read'),
+    (23,N'View Student Subject Enrollments'),
+    (24,N'Export Timetable as PDF'),
     (25,N'View Logs'),
-    (26,N'Search Recordss'),
-    (27,N'Export Data'),
-    (28,N'Revoke Action From Group'),
-    (29,N'Assign Action To Group'),
-    (30,N'Remove User From Group'),
-    (31,N'AddUser To Group'),
-    (32,N'Delete Group'),
-    (33,N'Update Group'),
-    (34,N'Create Group'),
-    (35,N'Unlock User'),
-    (36,N'Add Group Action'),
-    (37,N'Delete Group Action'),
-    (38,N'Delete Group Member'),
-    (39,N'Lock User'),
-    (40,N'Reset Password'),
-    (41,N'Change Password'),
-    (42,N'Set group Member')
+    (26,N'Revoke Action From Group'),
+    (27,N'Assign Action To Group'),
+    (28,N'Remove User From Group'),
+    (29,N'AddUser To Group'),
+    (30,N'Delete Group'),
+    (31,N'Update Group'),
+    (32,N'Create Group'),
+    (33,N'Unlock User'),
+    (34,N'Add Group Action'),
+    (35,N'Delete Group Action'),
+    (36,N'Delete Group Member'),
+    (37,N'Set group Member'),
+    (38,N'Reset Password'),
+    (39,N'Change Password'),
+    (40,N'Lock User')
 )
 AS Source ([ActionId], Description) 
 ON Target.[ActionId] = Source.[ActionId]

@@ -12,7 +12,7 @@ BEGIN TRY
 		WHERE  GroupId = @groupId AND StakeholderId = @groupMemberId
  
 		INSERT INTO usr.ActionLog (ActionId, KeyId, StakeholderId, ActionDate, [Description]) 
-		VALUES (38, @groupId, @stakeholderId, GETDATE(), 'delete Group Member: ' + CAST(@groupId AS NVARCHAR(5)))
+		VALUES (36, @groupId, @stakeholderId, GETDATE(), 'delete Group Member: ' + CAST(@groupId AS NVARCHAR(5)))
 	COMMIT TRANSACTION
 END TRY
 

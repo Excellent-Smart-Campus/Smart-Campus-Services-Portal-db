@@ -12,7 +12,7 @@ BEGIN TRY
 	SET	   IsDeleted = 1
 	WHERE GroupId = @groupId
 
-	INSERT INTO usr.ActionLog (ActionId, KeyId, StakeholderId, ActionDate) VALUES (32, @groupId, @stakeholderId, GETDATE())
+	INSERT INTO usr.ActionLog (ActionId, KeyId, StakeholderId, ActionDate) VALUES (30, @groupId, @stakeholderId, GETDATE())
  
 	COMMIT TRANSACTION
 END TRY

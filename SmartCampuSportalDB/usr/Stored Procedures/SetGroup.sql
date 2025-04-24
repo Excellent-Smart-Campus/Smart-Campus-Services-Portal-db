@@ -14,7 +14,7 @@ BEGIN TRY
 		INSERT INTO usr.[Group] (Description, IsDeleted) VALUES (@description, 0)
 		SELECT @groupId = SCOPE_IDENTITY()
 
-		INSERT INTO usr.ActionLog (ActionId, KeyId, StakeholderId, ActionDate, Description) VALUES (34, @groupId, @stakeholderId, GETDATE(), @description)
+		INSERT INTO usr.ActionLog (ActionId, KeyId, StakeholderId, ActionDate, Description) VALUES (32, @groupId, @stakeholderId, GETDATE(), @description)
 	END
 	ELSE
 	BEGIN

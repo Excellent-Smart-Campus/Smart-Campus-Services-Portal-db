@@ -13,7 +13,7 @@ BEGIN TRY
         INSERT INTO usr.[GroupMember] (GroupId, StakeholderId) VALUES (@groupId, @userId)
 
         INSERT INTO usr.ActionLog (ActionId, KeyId, StakeholderId, ActionDate) 
-        VALUES (5, @groupId, @stakeholderId, GETDATE())
+        VALUES (37, @groupId, @stakeholderId, GETDATE())
     END
     COMMIT TRANSACTION
 END TRY

@@ -1,5 +1,5 @@
 --- StakeholderContact
-MERGE INTO dbo.[ContactType] AS Target
+MERGE INTO sh.[ContactType] AS Target
 USING (VALUES
   (1, N'Email Address'),
   (2, N'Mobile Number')
@@ -135,7 +135,7 @@ WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
 
 -- subject
-MERGE INTO svc.Subject AS Target
+MERGE INTO edu.Subject AS Target
 USING (VALUES
   (1, N'DTD117V', N'Data Structures And Algorithms'),
   (2, N'GMD117V', N'Games Engineering'),

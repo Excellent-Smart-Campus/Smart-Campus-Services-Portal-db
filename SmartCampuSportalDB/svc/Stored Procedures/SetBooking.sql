@@ -13,7 +13,7 @@ SET NOCOUNT ON;
     IF @bookingId IS NULL
     BEGIN
         INSERT INTO svc.Booking (StakeholderId, RoomId, Purpose, BookingDate, StartTime, EndTime, StatusId, DateCreated)
-        VALUES (@stakeholderId, @roomId, @purpose, @purpose, @bookingDate, @startTime, @endTime, @statusId, GETDATE());
+        VALUES (@stakeholderId, @roomId, @purpose, @bookingDate, @startTime, @endTime, @statusId, GETDATE());
         SELECT @bookingId = SCOPE_IDENTITY();
     END
     ELSE

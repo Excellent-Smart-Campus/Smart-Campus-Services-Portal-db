@@ -29,3 +29,25 @@ jobs:
       with:
         name: SQLDB
         path: ${{secrets.ARTIFACTS_PATH}}*.dacpac
+
+  deploy:
+    name: Deploy to Azure SQL
+    runs-on: windows-latest
+    needs: build
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: SQLDB
+          path: dacpac
+
+      - name: Deploy to Azure SQL
+        run: |
+          sqlpackage\sqlpackage.exe /Action:Publish `
+            /SourceFile:"dacpac\*.dacpac" `
+            /TargetServerName:"${{ secrets.SQL_SERVER }}" `
+            /TargetDatabaseName:"${{ secrets.SQL_DATABASE }}" `
+            /TargetUser:"${{ secrets.SQL_USERNAME }}" `
+            /TargetPassword:"${{ secrets.SQL_PASSWORD }}" `
+            /p:BlockOnPossibleDataLoss=false

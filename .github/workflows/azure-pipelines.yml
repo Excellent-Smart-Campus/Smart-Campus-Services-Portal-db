@@ -46,6 +46,9 @@ jobs:
         run: |
           dotnet tool install -g microsoft.sqlpackage
 
+      - name: Add SqlPackage to PATH
+        run: echo "${{ runner.tool_cache }}/dotnet/tools" >> $GITHUB_PATH
+
       - name: Deploy to Azure SQL
         run: |
           sqlpackage\sqlpackage.exe /Action:Publish `

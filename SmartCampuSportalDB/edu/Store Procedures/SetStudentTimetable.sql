@@ -32,7 +32,7 @@ SELECT
 	[S].SubjectCode,
 	[E].SubjectId,
 	[E].DayOfWeekTypeId,
-	[D].DayOfWeekType,
+	[D].Description,
 	[E].RoomId,
 	[R].RoomNumber,
     [E].StartTime,

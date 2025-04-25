@@ -15,7 +15,7 @@ SELECT
 	2,
 	ActionId
 FROM usr.[Action]
-WHERE ActionId NOT IN(1,2,3,7,8,9,10,13,20,22, 24,39,40)
+WHERE ActionId NOT IN(1,2,3,7,8,9,10,13,20,22, 24,39,40, 41)
 
 --Lecturers
 INSERT INTO usr.GroupAction 

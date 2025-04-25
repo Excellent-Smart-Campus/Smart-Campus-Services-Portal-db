@@ -1,5 +1,5 @@
 CREATE TABLE [edu].[StudentTimetable] (
-    [StudentTimetableId]           INT IDENTITY(1,1) NOT NULL,
+    [StudentTimetableId]    INT IDENTITY(1,1) NOT NULL,
     [StakeholderId]         INT NOT NULL,
     [SubjectId]             INT NOT NULL,
     [DayOfWeekTypeId]       INT NOT NULL,

@@ -39,7 +39,7 @@ WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
 
 --- Stakeholder
-SET IDENTITY_INSERT edu.Subject ON;
+SET IDENTITY_INSERT sh.Stakeholder ON;
 MERGE INTO sh.[Stakeholder] AS Target
 USING (VALUES
   (1, 4, N'Diploma In Computer Science', 0, GETDATE()),
@@ -47,19 +47,22 @@ USING (VALUES
   (3, 4, N'Advance Diploma In Computer Science', 0, GETDATE()),
   (4, 4, N'Advance Diploma In Computer Systems Engineering', 0, GETDATE())
 )
-AS Source (ContactTypeId, Description)
-ON Target.ContactTypeId = Source.ContactTypeId
+AS Source (StakeholderId, StakeholderTypeId, Name, IsDeleted, DateCreated)
+ON Target.StakeholderId = Source.StakeholderId
 
 WHEN MATCHED THEN
-UPDATE SET Description = Source.Description
+UPDATE SET StakeholderTypeId = Source.StakeholderTypeId
+            Name = Source.Name,
+            IsDeleted = Source.IsDeleted,
+            DateCreated = Source.DateCreated
 
 WHEN NOT MATCHED BY TARGET THEN
-INSERT (ContactTypeId, Description)
-VALUES (ContactTypeId, Description)
+INSERT (StakeholderId, StakeholderTypeId, Name, IsDeleted, DateCreated)
+VALUES (StakeholderId, StakeholderTypeId, Name, IsDeleted, DateCreated)
 
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
-SET IDENTITY_INSERT edu.Subject OFF;
+SET IDENTITY_INSERT sh.Stakeholder OFF;
 
 ----- Title
 MERGE INTO sh.Title AS Target 
@@ -204,7 +207,7 @@ USING (VALUES
   (3, N'ADCS1', N'Advance Diploma In Computer Science'),
   (4, N'ADCSE', N'Advance Diploma In Computer Systems Engineering')
 )
-AS Source (StakeholderId, SubjectCode, SubjectName)
+AS Source (StakeholderId, CourseCode, CourseName)
 ON Target.StakeholderId = Source.StakeholderId
 
 WHEN MATCHED THEN

@@ -35,11 +35,12 @@ SELECT
 	[G].Description,
 	[GM].StakeholderId,
 	[U].Username,
-	[S].FirstName,
-	[S].LastName,
-	[S].TitleId
+	[SP].FirstName,
+	[SP].LastName,
+	[SP].TitleId
 FROM usr.[GroupMember] [GM]
-INNER JOIN usr.[Group] [G] ON [G].GroupId = [GM].GroupId
+INNER JOIN [usr].[Group] [G] ON [G].GroupId = [GM].GroupId
 INNER JOIN [usr].[User] [U] ON [U].StakeholderId = [GM].StakeholderId
 INNER JOIN sh.[Stakeholder] [S] ON [S].StakeholderId = [GM].StakeholderId
+INNER JOIN [sh].StakeholderPerson [SP] ON [SP].StakeholderId = [S].StakeholderId
 WHERE [GM].GroupId = @groupId 

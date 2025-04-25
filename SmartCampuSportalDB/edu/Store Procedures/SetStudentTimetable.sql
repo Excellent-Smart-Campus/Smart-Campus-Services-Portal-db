@@ -37,7 +37,7 @@ SELECT
 	[R].RoomNumber
     [E].StartTime,
     [E].EndTime,
-    [E].Location,
+    [E].Location
 FROM [edu].StudentTimetable [E]
 INNER JOIN [edu].Subject [S] ON [E].SubjectId = [S].SubjectId
 INNER JOIN [edu].DayOfWeekType [D] ON [E].DayOfWeekTypeId = [D].DayOfWeekTypeId

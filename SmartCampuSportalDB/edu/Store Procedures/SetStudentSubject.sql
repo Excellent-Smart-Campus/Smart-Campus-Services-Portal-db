@@ -1,6 +1,6 @@
 CREATE PROCEDURE [edu].[setStudentSubject]
     @subjectId              INT,
-    @stakeholderId          INT = NULL,
+    @stakeholderId          INT,
     @isDeleted              BIT = 0
 AS
 BEGIN
@@ -18,7 +18,7 @@ BEGIN
     ELSE
     BEGIN
         INSERT INTO edu.StudentSubject (SubjectId, StakeholderId, IsDeleted)
-        VALUES (@subjectId ,@stakeholderId @isDeleted);
+        VALUES (@subjectId, @stakeholderId, @isDeleted);
     END;
     SELECT
        [E].SubjectId,

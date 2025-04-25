@@ -45,7 +45,7 @@ USING (VALUES
   (1, 4, N'Diploma In Computer Science', 0, GETDATE()),
   (2, 4, N'Diploma In Computer Systems Engineering', 0, GETDATE()),
   (3, 4, N'Advance Diploma In Computer Science', 0, GETDATE()),
-  (4, 4, N'Advance Diploma In Computer Systems Engineering', 0, GETDATE()),
+  (4, 4, N'Advance Diploma In Computer Systems Engineering', 0, GETDATE())
 )
 AS Source (ContactTypeId, Description)
 ON Target.ContactTypeId = Source.ContactTypeId

@@ -1,26 +1,23 @@
 CREATE PROCEDURE [sh].[SetStakeholder]
 	@stakeholderId			INT = NULL,
     @stakeholderTypeId      INT,
-    @titleId                INT,
-	@firstName				NVARCHAR(255),
-    @lastName				NVARCHAR(255),
+    @name				NVARCHAR(255),
 	@isDeleted				BIT = 0
 AS
 SET NOCOUNT ON;
 
     IF @stakeholderId IS NULL
     BEGIN
-        INSERT INTO sh.Stakeholder (StakeholderTypeId, TitleId, FirstName, LastName, IsDeleted, DateCreated)
-        VALUES (@stakeholderTypeId, @titleId, @firstName, @lastName, @isDeleted, GETDATE());
+        INSERT INTO sh.Stakeholder (StakeholderTypeId, Name, IsDeleted, DateCreated)
+        VALUES (@stakeholderTypeId, @name, @isDeleted, GETDATE());
         SELECT @stakeholderId = SCOPE_IDENTITY();
     END
     ELSE
     BEGIN
         UPDATE sh.Stakeholder
-        SET FirstName = @firstName,
-            LastName = lastName,
-            TitleId = @titleId,
-            IsDeleted = @isDeleted
+        SET Name = @name,
+            IsDeleted = @isDeleted,
+            DateUpdated = GETDATE()
         WHERE StakeholderId = @stakeholderId;
     END;
 

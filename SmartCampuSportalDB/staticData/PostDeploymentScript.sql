@@ -22,7 +22,8 @@ MERGE INTO sh.StakeholderType AS Target
 USING (VALUES
   (1, N'Student'),
   (2, N'Lecture'),
-  (3, N'Admin')
+  (3, N'Admin'),
+  (4, N'Course')
 )
 AS Source (StakeholderTypeId, Description)
 ON Target.StakeholderTypeId = Source.StakeholderTypeId
@@ -36,6 +37,29 @@ VALUES (StakeholderTypeId, Description)
 
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
+
+--- Stakeholder
+SET IDENTITY_INSERT edu.Subject ON;
+MERGE INTO sh.[Stakeholder] AS Target
+USING (VALUES
+  (1, 4, N'Diploma In Computer Science', 0, GETDATE()),
+  (2, 4, N'Diploma In Computer Systems Engineering', 0, GETDATE()),
+  (3, 4, N'Advance Diploma In Computer Science', 0, GETDATE()),
+  (4, 4, N'Advance Diploma In Computer Systems Engineering', 0, GETDATE()),
+)
+AS Source (ContactTypeId, Description)
+ON Target.ContactTypeId = Source.ContactTypeId
+
+WHEN MATCHED THEN
+UPDATE SET Description = Source.Description
+
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (ContactTypeId, Description)
+VALUES (ContactTypeId, Description)
+
+WHEN NOT MATCHED BY SOURCE THEN
+DELETE;
+SET IDENTITY_INSERT edu.Subject OFF;
 
 ----- Title
 MERGE INTO sh.Title AS Target 
@@ -72,9 +96,9 @@ DELETE;
 --- StakeholderRelationshipType
 MERGE INTO sh.StakeholderRelationshipType AS Target
 USING (VALUES
-  (1, N'Mentors'),
-  (2, N'Manage'),
-  (4, N'Supervise')
+  (1, N'Enrolled'),
+  (2, N'Teaches'),
+  (3, N'Supervise')
 )
 AS Source (StakeholderRelationshipTypeId, Description)
 ON Target.StakeholderRelationshipTypeId = Source.StakeholderRelationshipTypeId
@@ -142,7 +166,19 @@ USING (VALUES
   (2, N'GMD117V', N'Games Engineering'),
   (3, N'SEC117V', N'Service-Oriented Computing'),
   (4, N'HMD117V', N'Human Computer Interaction'),
-  (5, N'SFG117V', N'Software Engineering')
+  (5, N'SFG117V', N'Software Engineering'),
+  
+  (6, N'CFA115D', N'Computing Fundamentals'),
+  (7, N'PPA115D', N'Principles of Programming A'),
+  (8, N'WEB115D', N'Web Computing'),
+  
+  (9, N'CMS115D', N'Communication Science'),
+  (10, N'DE1115D', N'Digital Electronics'),
+  (11, N'PG1115D', N'Programming'),
+  
+  (12, N'EGD107V', N'Engineering Project Design'),
+  (13, N'AIS117V', N'Artificial Inteligent Systems'),
+  (14, N'EBD117V', N'Embedded Systems Design')
 )
 AS Source (SubjectId, SubjectCode, SubjectName)
 ON Target.SubjectId = Source.SubjectId
@@ -158,6 +194,62 @@ VALUES (SubjectId, SubjectCode, SubjectName)
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
 SET IDENTITY_INSERT edu.Subject OFF;
+
+-- COURSE
+SET IDENTITY_INSERT edu.Course ON;
+MERGE INTO edu.Course AS Target
+USING (VALUES
+  (1, N'DCS01', N'Diploma In Computer Science'),
+  (2, N'DCSE1', N'Diploma In Computer Systems Engineering'),
+  (3, N'ADCS1', N'Advance Diploma In Computer Science'),
+  (4, N'ADCSE', N'Advance Diploma In Computer Systems Engineering')
+)
+AS Source (StakeholderId, SubjectCode, SubjectName)
+ON Target.StakeholderId = Source.StakeholderId
+
+WHEN MATCHED THEN
+UPDATE SET CourseCode = Source.CourseCode,
+          CourseName = Source.CourseName
+
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (StakeholderId, CourseCode, CourseName)
+VALUES (StakeholderId, CourseCode, CourseName)
+
+WHEN NOT MATCHED BY SOURCE THEN
+DELETE;
+SET IDENTITY_INSERT edu.Course OFF;
+
+-- CourseSubject
+MERGE INTO edu.CourseSubject AS Target
+USING (VALUES
+  (1, 6, 1),
+  (1, 7, 1),
+  (1, 8, 1), 
+  (2, 9, 1),
+  (2, 10, 1),
+  (2, 11, 1), 
+  (3, 1, 1),
+  (3, 2, 1),
+  (3, 3, 1),
+  (3, 4, 1),
+  (3, 5, 1),
+  (4, 12, 1),
+  (4, 13, 1),
+  (4, 14, 1),
+)
+AS Source (CourseId, SubjectId, IsMandatory)
+ON Target.CourseId = Source.CourseId
+AND Target.SubjectId = Source.SubjectId
+
+WHEN MATCHED THEN
+UPDATE SET IsMandatory = Source.IsMandatory
+
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (CourseId, SubjectId, IsMandatory)
+VALUES (CourseId, SubjectId, IsMandatory)
+
+WHEN NOT MATCHED BY SOURCE THEN
+DELETE;
 
 -- RoomType
 MERGE INTO svc.RoomType AS Target
@@ -251,7 +343,8 @@ USING (VALUES
     (37,N'Set group Member'),
     (38,N'Reset Password'),
     (39,N'Change Password'),
-    (40,N'Lock User')
+    (40,N'Lock User'),
+    (41,N'Student Enrollment Subject')
 )
 AS Source ([ActionId], Description) 
 ON Target.[ActionId] = Source.[ActionId]

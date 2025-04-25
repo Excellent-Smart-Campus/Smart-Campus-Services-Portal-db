@@ -83,6 +83,7 @@
         <Build Include="Security\svc.sql" />
         <Build Include="Security\usr.sql" />
         <Build Include="sh\Tables\Stakeholder.sql" />
+        <Build Include="sh\Tables\StakeholderPerson.sql" />
         <Build Include="sh\Tables\Title.sql" />
         <Build Include="sh\Tables\StakeholderRelationship.sql" />
         <Build Include="sh\Tables\StakeholderRelationshipType.sql" />
@@ -92,6 +93,9 @@
         <Build Include="sh\Store Procedures\GetStakeholder.sql" />
         <Build Include="sh\Store Procedures\GetStakeholderContact.sql" />
         <Build Include="sh\Store Procedures\GetStakeholderRelationship.sql" />
+        <Build Include="sh\Store Procedures\GetStakeholderPerson.sql" />
+        <Build Include="sh\Store Procedures\GetTitles.sql" />
+        <Build Include="sh\Store Procedures\SetStakeholderPerson.sql" />
         <Build Include="sh\Store Procedures\SetStakeholder.sql" />
         <Build Include="sh\Store Procedures\SetStakeholderContact.sql" />
         <Build Include="sh\Store Procedures\SetStakeholderRelationship.sql" />
@@ -99,6 +103,14 @@
         <Build Include="edu\Tables\StudentSubject.sql" />
         <Build Include="edu\Tables\StudentTimetable.sql" />
         <Build Include="edu\Tables\Subject.sql" />
+        <Build Include="edu\Tables\Course.sql" />
+        <Build Include="edu\Tables\CourseSubject.sql" />
+        <Build Include="edu\Store Procedures\SetStudentSubject.sql" />
+        <Build Include="edu\Store Procedures\SetStudentTimetable.sql" />
+        <Build Include="edu\Store Procedures\GetCourseById.sql" />
+        <Build Include="edu\Store Procedures\GetSubjectById.sql" />
+        <Build Include="edu\Store Procedures\GetCourseSubjectsById.sql" />
+        <Build Include="edu\Store Procedures\GetSubjectsByCourseId.sql" />
         <Build Include="ntf\Tables\Notification.sql" />
         <Build Include="ntf\Tables\NotificationView.sql" />
         <Build Include="svc\Tables\Booking.sql" />
@@ -123,7 +135,7 @@
         <Build Include="usr\Stored Procedures\GetAllActions.sql" />
         <Build Include="usr\Stored Procedures\GetGroup.sql" />
         <Build Include="usr\Stored Procedures\GetGroupAction.sql" />
-        <Build Include="usr\Stored Procedures\GetGroupMembership.sql" />
+        <Build Include="usr\Stored Procedures\GetGroupActiveMembers.sql" />
         <Build Include="usr\Stored Procedures\GetUserGroup.sql" />
         <Build Include="usr\Stored Procedures\SetActionLog.sql" />
         <Build Include="usr\Stored Procedures\SetGroup.sql" />

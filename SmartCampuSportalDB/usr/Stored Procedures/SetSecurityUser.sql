@@ -23,13 +23,14 @@ ELSE
 SELECT
     [U].StakeholderId,
 	[U].Username,
-    [SH].FirstName,
-    [SH].LastName,
-    [SH].TitleId,
+    [SP].FirstName,
+    [SP].LastName,
+    [SP].TitleId,
     [U].PasswordHash,
     [U].SecurityStamp,
     [U].IsDeleted,
     [U].IsLocked
 FROM [usr].[User] [U]
 INNER JOIN [sh].Stakeholder SH ON [SH].StakeholderId = [U].StakeholderId
+INNER JOIN [sh].StakeholderPerson [SP] ON [SP].StakeholderId = [SH].StakeholderId
 WHERE [U].StakeholderId = @stakeholderId

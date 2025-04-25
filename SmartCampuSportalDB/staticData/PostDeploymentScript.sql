@@ -51,7 +51,7 @@ AS Source (StakeholderId, StakeholderTypeId, Name, IsDeleted, DateCreated)
 ON Target.StakeholderId = Source.StakeholderId
 
 WHEN MATCHED THEN
-UPDATE SET StakeholderTypeId = Source.StakeholderTypeId
+UPDATE SET StakeholderTypeId = Source.StakeholderTypeId,
             Name = Source.Name,
             IsDeleted = Source.IsDeleted,
             DateCreated = Source.DateCreated

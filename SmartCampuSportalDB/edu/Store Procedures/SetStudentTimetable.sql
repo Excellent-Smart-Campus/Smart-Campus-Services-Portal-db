@@ -34,7 +34,7 @@ SELECT
 	[E].DayOfWeekTypeId,
 	[D].DayOfWeekType,
 	[E].RoomId,
-	[R].RoomNumber
+	[R].RoomNumber,
     [E].StartTime,
     [E].EndTime,
     [E].Location

@@ -1,5 +1,5 @@
 CREATE TABLE [sh].[StakeholderPerson] (
-    [StakeholderId]	        BIGINT NOT NULL PRIMARY KEY,
+    [StakeholderId]			INT NOT NULL PRIMARY KEY,
     [TitleId]               INT NULL,
     [FirstName]             NVARCHAR (255) NOT NULL,
     [LastName]              NVARCHAR (255) NOT NULL

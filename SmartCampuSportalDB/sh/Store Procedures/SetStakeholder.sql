@@ -24,9 +24,6 @@ SET NOCOUNT ON;
 SELECT 
 	[SH].StakeholderId,
 	[SH].StakeholderTypeId,
-	[SH].FirstName,
-    [SH].LastName,
-    [SH].TitleId
+	[SH].Name
 FROM [sh].Stakeholder [SH]
-INNER JOIN sh.Title [T] ON [T].TitleId = [SH].TitleId
 WHERE [SH].StakeholderId = @stakeholderId

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [edu].[GetCourseSubjectsById]
+CREATE PROCEDURE [edu].[GetSubjectsByCourseId]
     @stakeholderId	INT = NULL
 AS
 SET NOCOUNT ON;

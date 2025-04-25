@@ -199,7 +199,6 @@ DELETE;
 SET IDENTITY_INSERT edu.Subject OFF;
 
 -- COURSE
-SET IDENTITY_INSERT edu.Course ON;
 MERGE INTO edu.Course AS Target
 USING (VALUES
   (1, N'DCS01', N'Diploma In Computer Science'),
@@ -220,7 +219,7 @@ VALUES (StakeholderId, CourseCode, CourseName)
 
 WHEN NOT MATCHED BY SOURCE THEN
 DELETE;
-SET IDENTITY_INSERT edu.Course OFF;
+
 
 -- CourseSubject
 MERGE INTO edu.CourseSubject AS Target

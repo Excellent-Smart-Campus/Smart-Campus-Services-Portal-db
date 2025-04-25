@@ -235,7 +235,7 @@ USING (VALUES
   (3, 5, 1),
   (4, 12, 1),
   (4, 13, 1),
-  (4, 14, 1),
+  (4, 14, 1)
 )
 AS Source (CourseId, SubjectId, IsMandatory)
 ON Target.CourseId = Source.CourseId

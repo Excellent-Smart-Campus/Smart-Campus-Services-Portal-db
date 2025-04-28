@@ -1,5 +1,5 @@
 CREATE PROCEDURE [edu].[GetSubjectsByCourseId]
-    @stakeholderId	INT = NULL
+    @courseId	INT
 AS
 SET NOCOUNT ON;
 SELECT 
@@ -11,5 +11,5 @@ FROM [edu].Course [C]
 INNER JOIN [sh].Stakeholder [S] ON [S].StakeholderId = [C].StakeholderId
 INNER JOIN [edu].CourseSubject [CS] ON [C].StakeholderId = [CS].CourseId
 INNER JOIN [edu].Subject [SS] ON [CS].SubjectId = [SS].SubjectId
-WHERE (@stakeholderId IS NULL OR [S].StakeholderId = @stakeholderId)
+WHERE [S].StakeholderId = @courseId
 AND  [S].IsDeleted = 0

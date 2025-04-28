@@ -4,7 +4,7 @@ AS
 SET NOCOUNT ON;
 
 SELECT 
-    [C].StakeholderId,
+    [C].StakeholderId AS 'CourseId',
 	[C].CourseCode,
 	[C].CourseName
 FROM [edu].Course [C]

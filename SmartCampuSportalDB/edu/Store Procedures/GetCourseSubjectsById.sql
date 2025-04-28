@@ -1,9 +1,9 @@
 CREATE PROCEDURE [edu].[GetCourseSubjectsById]
-    @stakeholderId	INT = NULL
+    @subjectId	INT = NULL
 AS
 SET NOCOUNT ON;
 SELECT 
-    [C].StakeholderId,
+    [C].StakeholderId AS 'CourseId',
 	[C].CourseCode,
 	[C].CourseName,
 	[SS].SubjectId,
@@ -14,4 +14,4 @@ FROM [edu].Course [C]
 INNER JOIN [sh].Stakeholder [S] ON [S].StakeholderId = [C].StakeholderId
 INNER JOIN [edu].CourseSubject [CS] ON [C].StakeholderId = [CS].CourseId
 INNER JOIN [edu].Subject [SS] ON [CS].SubjectId = [SS].SubjectId
-WHERE (@stakeholderId IS NULL OR [S].StakeholderId = @stakeholderId)
+WHERE (@subjectId IS NULL OR [SS].SubjectId = @subjectId)

@@ -137,6 +137,7 @@
         <Build Include="usr\Stored Procedures\GetGroupAction.sql" />
         <Build Include="usr\Stored Procedures\GetGroupActiveMembers.sql" />
         <Build Include="usr\Stored Procedures\GetUserGroup.sql" />
+        <Build Include="usr\Stored Procedures\GetSecurityUser.sql" />
         <Build Include="usr\Stored Procedures\SetActionLog.sql" />
         <Build Include="usr\Stored Procedures\SetGroup.sql" />
         <Build Include="usr\Stored Procedures\SetGroupAction.sql" />

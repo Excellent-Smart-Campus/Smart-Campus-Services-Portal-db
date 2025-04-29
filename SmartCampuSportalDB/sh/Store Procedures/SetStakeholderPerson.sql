@@ -6,7 +6,10 @@ CREATE PROCEDURE [sh].[SetStakeholderPerson]
 AS
 SET NOCOUNT ON;
 
-    IF @stakeholderId IS NULL
+    IF NOT EXISTS(
+           SELECT StakeholderId 
+           FROM sh.StakeholderPerson 
+           WHERE StakeholderId = @stakeholderId)
     BEGIN
         INSERT INTO sh.StakeholderPerson (StakeholderId, TitleId, FirstName, LastName)
         VALUES (@stakeholderId, @titleId, @firstName, @lastName);

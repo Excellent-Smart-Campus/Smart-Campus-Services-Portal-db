@@ -58,10 +58,8 @@ UPDATE SET StakeholderTypeId = Source.StakeholderTypeId,
 
 WHEN NOT MATCHED BY TARGET THEN
 INSERT (StakeholderId, StakeholderTypeId, Name, IsDeleted, DateCreated)
-VALUES (StakeholderId, StakeholderTypeId, Name, IsDeleted, DateCreated)
+VALUES (StakeholderId, StakeholderTypeId, Name, IsDeleted, DateCreated);
 
-WHEN NOT MATCHED BY SOURCE THEN
-DELETE;
 SET IDENTITY_INSERT sh.Stakeholder OFF;
 
 ----- Title

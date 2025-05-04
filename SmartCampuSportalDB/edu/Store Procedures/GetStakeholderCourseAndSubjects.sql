@@ -1,6 +1,6 @@
 CREATE PROCEDURE [edu].[GetStakeholderCourseAndSubjects]
     @stakeholderId INT,
-    @stakeholderRelationshipTypeId INT = NULL; 
+    @stakeholderRelationshipTypeId INT = NULL 
 AS
 SET NOCOUNT ON;
 SELECT

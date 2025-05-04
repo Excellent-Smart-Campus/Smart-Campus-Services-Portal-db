@@ -1,6 +1,6 @@
 CREATE PROCEDURE [edu].[GetTimeTable]
     @stakeholderId INT,
-    @stakeholderRelationshipTypeId INT = NULL; 
+    @stakeholderRelationshipTypeId INT = NULL
 AS
 BEGIN
     SET NOCOUNT ON;

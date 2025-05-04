@@ -1,6 +1,6 @@
 CREATE PROCEDURE [edu].[GetTimeTable]
     @stakeholderId INT,
-    @stakeholderRelationshipTypeId INT
+    @stakeholderRelationshipTypeId INT = NULL; 
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -17,7 +17,7 @@ BEGIN
             SELECT 1 AS RegisteredCheck
             FROM sh.StakeholderRelationship 
             WHERE StakeholderId = @stakeholderId 
-            AND StakeholderRelationshipTypeId = @stakeholderRelationshipTypeId
+            AND (@stakeholderRelationshipTypeId IS NULL OR StakeholderRelationshipTypeId = @stakeholderRelationshipTypeId)
             AND RelatedStakeholderId = C.StakeholderId
             AND EndDate IS NULL
         ) AS RegisteredCheck
@@ -28,6 +28,8 @@ BEGIN
     SELECT 
         [RS].CourseId,
         [RS].CourseCode,
+        T.DayOfWeekTypeId,
+        D.Description AS 'DayOfWeekType',
         T.TimetableId,
         [RS].SubjectId,
         [RS].SubjectCode,
@@ -35,8 +37,6 @@ BEGIN
         T.StartTime,
         T.EndTime,
         T.Location,
-        T.DayOfWeekTypeId,
-        D.Description AS 'DayOfWeekType',
         T.RoomId,
         R.RoomNumber,
         RT.Description AS 'RoomType'
@@ -45,4 +45,8 @@ BEGIN
     INNER JOIN [edu].[DayOfWeekType] D ON T.DayOfWeekTypeId = D.DayOfWeekTypeId
     INNER JOIN [svc].[Room] R ON T.RoomId = R.RoomId
     INNER JOIN [svc].[RoomType] RT ON R.RoomTypeId = RT.RoomTypeId
+    ORDER BY 
+        T.DayOfWeekTypeId,
+        [RS].CourseId,
+        [RS].SubjectId,
 END

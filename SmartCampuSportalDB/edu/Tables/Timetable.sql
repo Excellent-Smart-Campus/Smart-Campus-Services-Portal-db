@@ -13,3 +13,4 @@ CREATE TABLE [edu].[Timetable] (
     CONSTRAINT [FK_Timetable_DayOfWeekType] FOREIGN KEY ([DayOfWeekTypeId]) REFERENCES [edu].[DayOfWeekType] ([DayOfWeekTypeId]),
     CONSTRAINT [FK_Timetable_Room] FOREIGN KEY ([RoomId]) REFERENCES [svc].[Room] ([RoomId])
 );
+

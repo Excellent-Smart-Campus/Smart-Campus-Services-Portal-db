@@ -111,6 +111,8 @@
         <Build Include="edu\Store Procedures\GetSubjectById.sql" />
         <Build Include="edu\Store Procedures\GetCourseSubjectsById.sql" />
         <Build Include="edu\Store Procedures\GetSubjectsByCourseId.sql" />
+        <Build Include="edu\Store Procedures\GetStakeholderCourseAndSubjects.sql" />
+        <Build Include="edu\Store Procedures\GetTimeTable.sql" />
         <Build Include="ntf\Tables\Notification.sql" />
         <Build Include="ntf\Tables\NotificationView.sql" />
         <Build Include="svc\Tables\Booking.sql" />

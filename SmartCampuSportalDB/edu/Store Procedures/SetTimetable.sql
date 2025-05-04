@@ -11,19 +11,19 @@ AS
 SET NOCOUNT ON;
    IF @timetableId IS NULL OR @timetableId = 0
    BEGIN
-        INSERT INTO [edu].[StudentTimetable] ([StakeholderId],[SubjectId],[DayOfWeekTypeId],[RoomId],[StartTime],[EndTime],[Location])
+        INSERT INTO [edu].[Timetable] ([StakeholderId],[SubjectId],[DayOfWeekTypeId],[RoomId],[StartTime],[EndTime],[Location])
         VALUES (@stakeholderId, @subjectId, @dayOfWeekTypeId, @roomId, @startTime, @endTime, @location);
         SELECT @timetableId = SCOPE_IDENTITY();
    END
    ELSE
    BEGIN
-        UPDATE edu.StudentTimetable
+        UPDATE edu.Timetable
         SET  [DayOfWeekTypeId]  = @dayOfWeekTypeId,
              [RoomId]           = @roomId,
              [StartTime]        = @startTime,
              [EndTime]          = @endTime,
              [Location]         = @location
-        WHERE [TimetableId] = @timetableId;
+        WHERE TimetableId = @timetableId;
    END;
 
 SELECT 
@@ -31,14 +31,14 @@ SELECT
 	[E].StakeholderId,
 	[S].SubjectCode,
 	[E].SubjectId,
-	[E].DayOfWeekTypeId,
+	[E].DayOfWeekTypeId,TimetableId
 	[D].Description,
 	[E].RoomId,
 	[R].RoomNumber,
     [E].StartTime,
     [E].EndTime,
     [E].Location
-FROM [edu].StudentTimetable [E]
+FROM [edu].Timetable [E]
 INNER JOIN [edu].Subject [S] ON [E].SubjectId = [S].SubjectId
 INNER JOIN [edu].DayOfWeekType [D] ON [E].DayOfWeekTypeId = [D].DayOfWeekTypeId
 INNER JOIN [svc].Room [R] ON [E].RoomId = [R].RoomId

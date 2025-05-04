@@ -1,6 +1,6 @@
 CREATE PROCEDURE [edu].[GetStakeholderCourseAndSubjects]
     @stakeholderId INT,
-    @stakeholderRelationshipTypeId INT
+    @stakeholderRelationshipTypeId INT = NULL; 
 AS
 SET NOCOUNT ON;
 SELECT
@@ -18,7 +18,7 @@ CROSS APPLY (
     SELECT 1  AS RegisteredCheck
     FROM sh.StakeholderRelationship 
     WHERE StakeholderId = @stakeholderId 
-    AND StakeholderRelationshipTypeId = @stakeholderRelationshipTypeId
+    AND (@stakeholderRelationshipTypeId IS NULL OR StakeholderRelationshipTypeId = @stakeholderRelationshipTypeId)
     AND RelatedStakeholderId = C.StakeholderId
     AND EndDate IS NULL
 ) AS RegisteredCheck

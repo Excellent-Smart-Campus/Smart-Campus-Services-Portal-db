@@ -48,5 +48,5 @@ BEGIN
     ORDER BY 
         T.DayOfWeekTypeId,
         [RS].CourseId,
-        [RS].SubjectId,
+        [RS].SubjectId
 END

@@ -31,7 +31,7 @@ SELECT
 	[E].StakeholderId,
 	[S].SubjectCode,
 	[E].SubjectId,
-	[E].DayOfWeekTypeId,TimetableId
+	[E].DayOfWeekTypeId,TimetableId,
 	[D].Description,
 	[E].RoomId,
 	[R].RoomNumber,

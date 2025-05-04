@@ -344,7 +344,8 @@ USING (VALUES
     (38,N'Reset Password'),
     (39,N'Change Password'),
     (40,N'Lock User'),
-    (41,N'Student Enrollment Subject')
+    (41,N'Student Enrollment Subject'),
+    (42,N'View Profile')
 )
 AS Source ([ActionId], Description) 
 ON Target.[ActionId] = Source.[ActionId]

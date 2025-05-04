@@ -100,13 +100,13 @@
         <Build Include="sh\Store Procedures\SetStakeholderContact.sql" />
         <Build Include="sh\Store Procedures\SetStakeholderRelationship.sql" />
         <Build Include="edu\Tables\DayOfWeekType.sql" />
-        <Build Include="edu\Tables\StudentSubject.sql" />
-        <Build Include="edu\Tables\StudentTimetable.sql" />
+        <Build Include="edu\Tables\StakeholderSubject.sql" />
+        <Build Include="edu\Tables\Timetable.sql" />
         <Build Include="edu\Tables\Subject.sql" />
         <Build Include="edu\Tables\Course.sql" />
         <Build Include="edu\Tables\CourseSubject.sql" />
-        <Build Include="edu\Store Procedures\SetStudentSubject.sql" />
-        <Build Include="edu\Store Procedures\SetStudentTimetable.sql" />
+        <Build Include="edu\Store Procedures\SetStakeholderSubject.sql" />
+        <Build Include="edu\Store Procedures\SetTimetable.sql" />
         <Build Include="edu\Store Procedures\GetCourseById.sql" />
         <Build Include="edu\Store Procedures\GetSubjectById.sql" />
         <Build Include="edu\Store Procedures\GetCourseSubjectsById.sql" />

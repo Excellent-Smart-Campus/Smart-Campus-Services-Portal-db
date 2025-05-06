@@ -121,7 +121,7 @@
         <Build Include="svc\Tables\Room.sql" />
         <Build Include="svc\Tables\RoomType.sql" />
         <Build Include="svc\Tables\Status.sql" />
-        <Build Include="svc\Store Procedures\GetAvailableRoom.sql" />
+        <Build Include="svc\Stored Procedures\GetAvailableRoom.sql" />
         <Build Include="svc\Stored Procedures\SetBooking.sql" />
         <Build Include="svc\Stored Procedures\GetBooking.sql" />
         <Build Include="svc\Stored Procedures\GetMaintenanceIssue.sql" />

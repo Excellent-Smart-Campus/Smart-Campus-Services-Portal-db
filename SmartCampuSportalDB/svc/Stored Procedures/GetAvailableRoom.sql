@@ -6,15 +6,15 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    DECLARE @StartDate DATE = DATEFROMPARTS(@year, @month, 1),
-            @EndDate DATE = EOMONTH(@StartDate);
+    DECLARE @startDate DATE = DATEFROMPARTS(@year, @month, 1);
+    DECLARE @endDate DATE = EOMONTH(@startDate);
 
     WITH Dates AS (
-        SELECT @StartDate AS BookingDate
+        SELECT @startDate AS BookingDate
         UNION ALL
         SELECT DATEADD(DAY, 1, BookingDate)
         FROM Dates
-        WHERE BookingDate < @EndDate
+        WHERE BookingDate < @endDate
     ),
     TimeSlots AS (
         SELECT CAST('08:00:00' AS TIME) AS SlotStart

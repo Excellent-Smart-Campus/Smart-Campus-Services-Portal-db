@@ -1,8 +1,7 @@
 CREATE PROCEDURE [svc].[GetAvailableRoom]
     @year INT,
-    @month INT
-    @roomTypeid NVARCHAR(32) = 1;
-
+    @month INT,
+    @roomTypeId NVARCHAR(32) = null
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -54,7 +53,7 @@ BEGIN
     INNER JOIN [svc].RoomType RT on R.RoomTypeId = RT.RoomTypeId
     CROSS JOIN Dates D
     CROSS JOIN TimeSlots T
-    WHERE (@roomTypeid IS NULL OR R.RoomTypeId IN (SELECT value FROM STRING_SPLIT(@roomTypeid, ',')))
+    WHERE (@roomTypeId IS NULL OR R.RoomTypeId IN (SELECT value FROM STRING_SPLIT(@roomTypeId, ',')))
     ORDER BY D.BookingDate, R.RoomNumber, T.SlotStart
     OPTION (MAXRECURSION 1000)
 END

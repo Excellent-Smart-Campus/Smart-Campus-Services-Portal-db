@@ -1,3 +1,25 @@
+--- NotificationType
+MERGE INTO ntf.[NotificationType] AS Target
+USING (VALUES
+  (1, N'Booking'),
+  (2, N'Appointment'),
+  (3, N'Maintenance'),
+  (4, N'Announcement'),
+  (5, N'Subject')
+)
+AS Source (NotificationTypeId, Description)
+ON Target.NotificationTypeId = Source.NotificationTypeId
+
+WHEN MATCHED THEN
+UPDATE SET Description = Source.Description
+
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (NotificationTypeId, Description)
+VALUES (NotificationTypeId, Description)
+
+WHEN NOT MATCHED BY SOURCE THEN
+DELETE;
+
 --- StakeholderContact
 MERGE INTO sh.[ContactType] AS Target
 USING (VALUES

@@ -1,7 +1,8 @@
 CREATE PROCEDURE [svc].[SetBooking]
 	@bookingId		  INT = NULL,
     @stakeholderId	  INT,
-    @roomId			  INT,
+    @lecturerId       INT = NULL,
+    @roomId			  INT = NULL,
     @purpose		  VARCHAR(MAX),
     @bookingDate      DATETIME,
     @startTime        DATETIME,
@@ -12,8 +13,8 @@ SET NOCOUNT ON;
 
     IF @bookingId IS NULL
     BEGIN
-        INSERT INTO svc.Booking (StakeholderId, RoomId, Purpose, BookingDate, StartTime, EndTime, StatusId, DateCreated)
-        VALUES (@stakeholderId, @roomId, @purpose, @bookingDate, @startTime, @endTime, @statusId, GETDATE());
+        INSERT INTO svc.Booking (StakeholderId, LecturerId, RoomId, Purpose, BookingDate, StartTime, EndTime, StatusId, DateCreated)
+        VALUES (@stakeholderId,  @lecturerId, @roomId, @purpose, @bookingDate, @startTime, @endTime, @statusId, GETDATE());
         SELECT @bookingId = SCOPE_IDENTITY();
     END
     ELSE
@@ -27,6 +28,7 @@ SET NOCOUNT ON;
 SELECT 
 	[B].BookingId,
 	[B].StakeholderId,
+	[B].LecturerId,
 	[B].RoomId,
     [B].Purpose,
 	[B].BookingDate,

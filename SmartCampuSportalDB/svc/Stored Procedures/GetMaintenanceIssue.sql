@@ -6,6 +6,7 @@ SET NOCOUNT ON;
 SELECT 
 	[M].IssueId,
 	[M].StakeholderId,
+	[M].RoomId,
 	[M].Title,
     [M].Description,
 	[M].StatusId,

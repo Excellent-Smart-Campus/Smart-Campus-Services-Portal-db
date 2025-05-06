@@ -1,6 +1,7 @@
 CREATE PROCEDURE [svc].[SetMaintenanceIssue]
 	@issueId		  INT = NULL,
     @stakeholderId	  INT,
+    @roomId           INT,
     @title			  NVARCHAR(255),
     @description	  VARCHAR(MAX) = NULL,
     @statusId         INT,
@@ -10,8 +11,8 @@ SET NOCOUNT ON;
 
     IF @issueId IS NULL
     BEGIN
-        INSERT INTO svc.MaintenanceIssue (StakeholderId, Title, Description, StatusId, DateReported)
-        VALUES (@stakeholderId, @title, @description, @statusId, GETDATE());
+        INSERT INTO svc.MaintenanceIssue (StakeholderId, Title, RoomId, Description, StatusId, DateReported)
+        VALUES (@stakeholderId, @title, @roomId, @description, @statusId, GETDATE());
         SELECT @issueId = SCOPE_IDENTITY();
     END
     ELSE
@@ -26,6 +27,7 @@ SELECT
 	[M].IssueId,
 	[M].StakeholderId,
 	[M].Title,
+	[M].RoomId,
     [M].Description,
 	[M].StatusId,
     [M].DateReported,

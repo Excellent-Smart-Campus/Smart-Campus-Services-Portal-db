@@ -106,7 +106,6 @@
         <Build Include="edu\Tables\Course.sql" />
         <Build Include="edu\Tables\CourseSubject.sql" />
         <Build Include="edu\Store Procedures\SetStakeholderSubject.sql" />
-        <Build Include="edu\Store Procedures\GetAvailableRoom.sql" />
         <Build Include="edu\Store Procedures\SetTimetable.sql" />
         <Build Include="edu\Store Procedures\GetCourseById.sql" />
         <Build Include="edu\Store Procedures\GetSubjectById.sql" />
@@ -122,6 +121,7 @@
         <Build Include="svc\Tables\Room.sql" />
         <Build Include="svc\Tables\RoomType.sql" />
         <Build Include="svc\Tables\Status.sql" />
+        <Build Include="svc\Store Procedures\GetAvailableRoom.sql" />
         <Build Include="svc\Stored Procedures\SetBooking.sql" />
         <Build Include="svc\Stored Procedures\GetBooking.sql" />
         <Build Include="svc\Stored Procedures\GetMaintenanceIssue.sql" />

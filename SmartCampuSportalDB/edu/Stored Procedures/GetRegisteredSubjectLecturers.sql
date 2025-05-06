@@ -1,5 +1,5 @@
 CREATE PROCEDURE [edu].[GetRegisteredSubjectLecturers]
-	@@subjectId	INT = NULL
+	@subjectId	INT = NULL
 AS
 SET NOCOUNT ON;
 
@@ -17,4 +17,6 @@ CROSS APPLY (
 ) AS RC
 INNER JOIN edu.CourseSubject CS ON CS.SubjectId = S.SubjectId AND CS.CourseId = RC.CourseId
 INNER JOIN sh.Stakeholder SH ON SH.StakeholderId = SS.StakeholderId AND SH.StakeholderTypeId = 2
-WHERE S.SubjectId = @subjectId;
+WHERE S.SubjectId = @subjectId
+AND SS.IsDeleted = 0
+AND SH.IsDeleted = 0

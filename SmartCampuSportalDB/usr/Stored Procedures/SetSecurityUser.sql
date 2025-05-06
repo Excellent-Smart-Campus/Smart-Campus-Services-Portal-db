@@ -22,6 +22,7 @@ ELSE
 
 SELECT
     [U].StakeholderId,
+    [SH].StakeholderTypeId,
 	[U].Username,
     [SH].Name,
     [U].PasswordHash,

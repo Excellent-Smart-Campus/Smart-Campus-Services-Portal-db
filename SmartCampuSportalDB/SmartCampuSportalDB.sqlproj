@@ -106,6 +106,7 @@
         <Build Include="edu\Tables\Course.sql" />
         <Build Include="edu\Tables\CourseSubject.sql" />
         <Build Include="edu\Store Procedures\SetStakeholderSubject.sql" />
+        <Build Include="edu\Store Procedures\GetAvailableRoom.sql" />
         <Build Include="edu\Store Procedures\SetTimetable.sql" />
         <Build Include="edu\Store Procedures\GetCourseById.sql" />
         <Build Include="edu\Store Procedures\GetSubjectById.sql" />

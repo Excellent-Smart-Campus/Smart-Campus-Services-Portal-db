@@ -4,6 +4,7 @@ CREATE PROCEDURE [usr].[GetSecurityUser]
 AS
 SELECT 
 	[U].StakeholderId,
+	[SH].StakeholderTypeId,
 	[U].Username,
     [U].PasswordHash,
     [U].SecurityStamp,

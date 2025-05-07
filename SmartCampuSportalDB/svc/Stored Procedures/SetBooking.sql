@@ -1,13 +1,13 @@
 CREATE PROCEDURE [svc].[SetBooking]
-	@bookingId		  INT = NULL,
-    @stakeholderId	  INT,
-    @lecturerId       INT = NULL,
-    @roomId			  INT = NULL,
-    @purpose		  VARCHAR(MAX),
-    @bookingDate      DATETIME,
-    @startTime        DATETIME,
-    @endTime          DATETIME,
-    @statusId         INT
+	@bookingId	INT = NULL,
+    @stakeholderId	INT,
+    @lecturerId       	INT = NULL,
+    @roomId		INT = NULL,
+    @purpose		VARCHAR(MAX),
+    @bookingDate      	DATETIME,
+    @startTime        	DATETIME = NULL,
+    @endTime          	DATETIME = NULL,
+    @statusId         	INT
 AS
 SET NOCOUNT ON;
 

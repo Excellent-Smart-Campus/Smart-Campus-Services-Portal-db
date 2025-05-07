@@ -5,8 +5,8 @@ CREATE PROCEDURE [svc].[SetBooking]
     @roomId			  INT = NULL,
     @purpose		  VARCHAR(MAX),
     @bookingDate      DATETIME,
-    @startTime        TIME,
-    @endTime          TIME,
+    @startTime        TIME = NULL,
+    @endTime          TIME = NULL,
     @statusId         INT
 AS
 SET NOCOUNT ON;

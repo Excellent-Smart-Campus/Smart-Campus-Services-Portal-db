@@ -4,8 +4,7 @@ CREATE PROCEDURE [svc].[SetMaintenanceIssue]
     @roomId           INT,
     @title			  NVARCHAR(255),
     @description	  VARCHAR(MAX) = NULL,
-    @statusId         INT,
-    @startTime        DATETIME
+    @statusId         INT
 AS
 SET NOCOUNT ON;
 

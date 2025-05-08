@@ -129,6 +129,7 @@
         <Build Include="svc\Stored Procedures\GetBooking.sql" />
         <Build Include="svc\Stored Procedures\GetMaintenanceIssue.sql" />
         <Build Include="svc\Stored Procedures\SetMaintenanceIssue.sql" />
+        <Build Include="svc\Stored Procedures\GetStakeholderMaintenanceRequest.sql" />
         <Build Include="usr\Tables\User.sql" />
         <Build Include="usr\Tables\Action.sql" />
         <Build Include="usr\Tables\ActionLog.sql" />

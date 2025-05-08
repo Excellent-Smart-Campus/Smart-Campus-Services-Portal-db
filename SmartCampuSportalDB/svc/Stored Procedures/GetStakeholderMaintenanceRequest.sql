@@ -1,5 +1,5 @@
 CREATE PROCEDURE [svc].[GetStakeholderMaintenanceRequest]
-	@stakeholderId	INT = NULL
+	@stakeholderId	INT = NULL,
 	@statudId NVARCHAR(32) = NULL
 AS
 SET NOCOUNT ON;

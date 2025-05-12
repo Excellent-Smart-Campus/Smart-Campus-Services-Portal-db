@@ -150,6 +150,9 @@
         <Build Include="usr\Stored Procedures\SetGroupAction.sql" />
         <Build Include="usr\Stored Procedures\SetGroupMember.sql" />
         <Build Include="usr\Stored Procedures\SetSecurityUser.sql" />
+        <Build Include="usr\Stored Procedures\GetUser.sql" />
+        <Build Include="usr\Stored Procedures\GetAllUsers.sql" />
+
     </ItemGroup>
     <ItemGroup>
         <Reference Include="System" />

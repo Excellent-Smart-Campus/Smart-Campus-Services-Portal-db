@@ -159,4 +159,125 @@ END CATCH
 
 
 
+
+--Admin users 
+BEGIN TRANSACTION;
+BEGIN TRY
+
+    DECLARE @users TABLE (
+        FirstName NVARCHAR(255),
+        LastName NVARCHAR(255),
+        StakeholderTypeId INT,
+        EffectiveDate DATE,
+        Mobile NVARCHAR(20),
+        Email NVARCHAR(100),
+        SecurityStamp NVARCHAR(1000),
+        PasswordHash NVARCHAR(1000)
+    );
+
+    INSERT INTO @Users
+     (FirstName, LastName, StakeholderTypeId, EffectiveDate, Mobile, Email, SecurityStamp, PasswordHash)
+    VALUES 
+        ('georgia', 'mosamo', 3, CONVERT(DATE, GETDATE()), '0712345678', 'georgia.mosamo@un.org.za', 'U66FPCREDWKGI3AHYUN2XANY7RCOX6IH', 'AQAAAAIAAYagAAAAEHJUxYseW4edU89G3awZ+8sWEDW9HIcg+Fa1r9wqbVwUu+L2ByuxRbJ4/DZ5cAns+g=='),
+        ('betty', 'tinyane', 3, CONVERT(DATE, GETDATE()), '0723456789', 'bettytinyane@gmail.com', 'U66FPCREDWKGI3AHYUN2XANY7RCOX6IH', 'AQAAAAIAAYagAAAAEHJUxYseW4edU89G3awZ+8sWEDW9HIcg+Fa1r9wqbVwUu+L2ByuxRbJ4/DZ5cAns+g==')
+
+ 
+    DECLARE @FirstName NVARCHAR(255),
+        @LastName NVARCHAR(255),
+        @StakeholderTypeId INT,
+        @EffectiveDate DATE,
+        @Mobile NVARCHAR(20),
+        @Email NVARCHAR(100),
+        @SecurityStamp NVARCHAR(1000),
+        @PasswordHash NVARCHAR(1000),
+        @PersonStakeholderId INT;
+
+    DECLARE user_cursor CURSOR FOR
+        SELECT FirstName, 
+        LastName, 
+        StakeholderTypeId, 
+        EffectiveDate, 
+        Mobile,
+        Email,
+        SecurityStamp,
+        PasswordHash FROM @Users;
+
+    OPEN user_cursor;
+        FETCH NEXT FROM user_cursor 
+        INTO @FirstName, 
+            @LastName, 
+            @StakeholderTypeId, 
+            @EffectiveDate,
+            @Mobile,
+            @Email,
+            @SecurityStamp,
+            @PasswordHash;
+    
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Insert Stakeholder
+        INSERT INTO sh.Stakeholder (StakeholderTypeId, Name, DateCreated)
+        VALUES (
+            @StakeholderTypeId,
+            UPPER(LEFT(@FirstName, 1)) + LOWER(SUBSTRING(@FirstName, 2, LEN(@FirstName))) + ' ' +
+            UPPER(LEFT(@LastName, 1)) + LOWER(SUBSTRING(@LastName, 2, LEN(@LastName))),
+            GETDATE()
+        );
+        SET @PersonStakeholderId = SCOPE_IDENTITY();
+    
+        -- Insert StakeholderPerson
+        INSERT INTO sh.StakeholderPerson (StakeholderId, FirstName, LastName)
+        VALUES (
+            @PersonStakeholderId, 
+            UPPER(LEFT(@FirstName, 1)) + LOWER(SUBSTRING(@FirstName, 2, LEN(@FirstName))),
+            UPPER(LEFT(@LastName, 1)) + LOWER(SUBSTRING(@LastName, 2, LEN(@LastName)))
+        );
+
+        -- Insert Contact: 2 Mobile
+        INSERT INTO sh.Contact (StakeholderId,ContactTypeId, Detail)
+        VALUES (@PersonStakeholderId, 2, @Mobile);
+
+        -- Insert Contact: 1 Email
+        INSERT INTO sh.Contact (StakeholderId, ContactTypeId, Detail)
+        VALUES (@PersonStakeholderId, 1, @Email);
+
+        -- Insert User
+        INSERT INTO usr.[User] (StakeholderId, Username, PasswordHash, SecurityStamp, DateCreated)
+        VALUES (@PersonStakeholderId, @Email, @PasswordHash, @SecurityStamp, GETDATE());
+
+        -- GroupMember
+        INSERT INTO usr.GroupMember (GroupId, StakeholderId)
+        VALUES (1, @PersonStakeholderId);
+
+        FETCH NEXT FROM user_cursor 
+        INTO @FirstName, 
+            @LastName, 
+            @StakeholderTypeId, 
+            @EffectiveDate,
+            @Mobile,
+            @Email,
+            @SecurityStamp,
+            @PasswordHash;
+        END
+    CLOSE user_cursor;
+    DEALLOCATE user_cursor;
+
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    DECLARE @errorMessage nvarchar(max), @errorSeverity int, @errorState int;
+    SELECT @errorMessage = ERROR_MESSAGE() + ' Line ' + cast(ERROR_LINE() as nvarchar(5)), @errorSeverity = ERROR_SEVERITY(), @errorState = ERROR_STATE();
+
+    IF (@@TRANCOUNT > 0)
+    BEGIN
+        ROLLBACK TRANSACTION
+    END 
+
+    RAISERROR(@errorMessage, @errorSeverity, @errorState);
+END CATCH
+
+
+
+
+
    

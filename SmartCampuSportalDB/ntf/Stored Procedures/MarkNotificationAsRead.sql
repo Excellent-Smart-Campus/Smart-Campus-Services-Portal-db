@@ -3,7 +3,7 @@ CREATE PROCEDURE [ntf].[MarkNotificationAsRead]
     @notificationId INT
 AS
 SET NOCOUNT ON;
-    IF EXISTS (SELECT 1 FROM [ntf].[NotificationView] WHERE StakeholderId = @stakeholderId AND NotificationId = @notificationId ISNULL(IsRead, 0) = 0)
+    IF EXISTS (SELECT 1 FROM [ntf].[NotificationView] WHERE StakeholderId = @stakeholderId AND NotificationId = @notificationId AND IsRead = 0
     BEGIN
         UPDATE [ntf].[NotificationView]
         SET IsRead = 1
@@ -16,6 +16,6 @@ SELECT
     StakeholderId,
     IsRead,
     DateCreated,
-    DateUpdated,
+    DateUpdated
 FROM [ntf].[Notification] 
 WHERE NotificationId = @notificationId;

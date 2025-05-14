@@ -10,7 +10,7 @@ BEGIN
         N.NotificationTypeId,
         N.SubjectId 'RelatedSubject',
         N.Message,
-        N.IsRead,
+        NV.IsRead,
         N.DateCreated,
         N.DateUpdated,
         S.SubjectId,

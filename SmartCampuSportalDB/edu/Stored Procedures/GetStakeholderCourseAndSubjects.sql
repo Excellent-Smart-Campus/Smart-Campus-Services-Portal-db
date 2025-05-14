@@ -24,6 +24,6 @@ CROSS APPLY (
 ) AS RegisteredCheck
 INNER JOIN [edu].CourseSubject CS ON C.StakeholderId = CS.CourseId
 INNER JOIN [edu].[Subject] S ON CS.SubjectId = S.SubjectId
-INNER JOIN [edu].[StakeholderSubject] SS ON S.SubjectId = SS.SubjectId AND SS.StakeholderId = @stakeholderId
+INNER JOIN [edu].[StakeholderSubject] SS ON S.SubjectId = SS.SubjectId AND SS.StakeholderId = @stakeholderId AND SS.IsDeleted = 0
 INNER JOIN [sh].Stakeholder SH ON SH.StakeholderId = @stakeholderId
 INNER JOIN [sh].StakeholderType ST ON SH.StakeholderTypeId = ST.StakeholderTypeId

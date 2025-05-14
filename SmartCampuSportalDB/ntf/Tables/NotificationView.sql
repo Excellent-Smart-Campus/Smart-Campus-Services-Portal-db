@@ -1,7 +1,7 @@
 CREATE TABLE [ntf].[NotificationView] (
     [NotificationId]            INT NOT NULL,
     [StakeholderId]             INT NOT NULL,
-    [isRead]                    BIT NULL DEFAULT 0,
+    [IsRead]                    BIT NULL DEFAULT 0,
     [DateCreated]               DATETIME,
     [DateUpdated]               DATETIME NULL,
     CONSTRAINT [PK_NotificationView] PRIMARY KEY CLUSTERED ([StakeholderId] ASC, [NotificationId] ASC),

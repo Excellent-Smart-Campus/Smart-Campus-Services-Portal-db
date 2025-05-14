@@ -20,6 +20,6 @@ BEGIN
     INNER JOIN [ntf].Notification N ON NV.NotificationId = n.NotificationId
     INNER JOIN [sh].Stakeholder SH ON N.SenderId = SH.StakeholderId
     LEFT JOIN [edu].Subject S ON  N.SubjectId = S.SubjectId
-    WHERE NV.StakeholderId = @StakeholderId
+    WHERE NV.StakeholderId = @stakeholderId
     ORDER BY N.DateCreated DESC;
 END;

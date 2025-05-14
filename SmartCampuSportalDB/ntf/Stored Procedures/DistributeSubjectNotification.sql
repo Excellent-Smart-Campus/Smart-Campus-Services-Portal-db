@@ -15,11 +15,11 @@ BEGIN TRY
                 
         INSERT INTO [ntf].[NotificationView] (NotificationId, StakeholderId, IsRead, DateCreated)
         SELECT 
-            @notificationId
-            StakeholderId,
+            @notificationId,
+            S.StakeholderId,
             0,
              GETDATE()
-        FROM edu.[StakeholderSubject]
+        FROM edu.[StakeholderSubject] S
         WHERE SubjectId = @subjectId;
         
     COMMIT TRANSACTION;

@@ -1,5 +1,6 @@
 CREATE PROCEDURE [svc].[GetMaintenanceIssue]
-	@issueId		  INT
+	@issueId		  INT,
+	@statudId NVARCHAR(32) = NULL
 AS
 SET NOCOUNT ON;
 
@@ -15,4 +16,6 @@ SELECT
 FROM svc.MaintenanceIssue [M]
 INNER JOIN [sh].Stakeholder [S] ON [M].StakeholderId = [S].StakeholderId
 INNER JOIN [svc].[Status] [ST] ON [M].[StatusId] = [ST].StatusId
-WHERE [M].IssueId = @issueId
+WHERE (@issueId IS NULL OR [M].IssueId = @issueId)
+AND (@statudId IS NULL OR ST.StatusId IN (SELECT value FROM STRING_SPLIT(@statudId, ',')))
+

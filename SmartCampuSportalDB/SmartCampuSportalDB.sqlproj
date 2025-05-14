@@ -114,9 +114,14 @@
         <Build Include="edu\Stored Procedures\GetSubjectsByCourseId.sql" />
         <Build Include="edu\Stored Procedures\GetStakeholderCourseAndSubjects.sql" />
         <Build Include="edu\Stored Procedures\GetTimeTable.sql" />
+        <Build Include="edu\Stored Procedures\GetRegisteredStakeholder.sql" />
         <Build Include="ntf\Tables\Notification.sql" />
         <Build Include="ntf\Tables\NotificationType.sql" />
         <Build Include="ntf\Tables\NotificationView.sql" />
+        <Build Include="ntf\Stored Procedures\CreateNotificationWithRecipients.sql" />
+        <Build Include="ntf\Stored Procedures\DistributeSubjectNotification.sql" />
+        <Build Include="ntf\Stored Procedures\MarkNotificationAsRead.sql" />
+        <Build Include="ntf\Stored Procedures\GetNotificationsForStakeholder.sql" />
         <Build Include="svc\Tables\Booking.sql" />
         <Build Include="svc\Tables\BookingParticipant.sql" />
         <Build Include="svc\Tables\MaintenanceIssue.sql" />
@@ -150,6 +155,9 @@
         <Build Include="usr\Stored Procedures\SetGroupAction.sql" />
         <Build Include="usr\Stored Procedures\SetGroupMember.sql" />
         <Build Include="usr\Stored Procedures\SetSecurityUser.sql" />
+        <Build Include="usr\Stored Procedures\GetUser.sql" />
+        <Build Include="usr\Stored Procedures\GetAllUsers.sql" />
+
     </ItemGroup>
     <ItemGroup>
         <Reference Include="System" />

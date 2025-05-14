@@ -5,7 +5,8 @@ USING (VALUES
   (2, N'Appointment'),
   (3, N'Maintenance'),
   (4, N'Announcement'),
-  (5, N'Subject')
+  (5, N'Subject'),
+  (6, N'DirectMessage')
 )
 AS Source (NotificationTypeId, Description)
 ON Target.NotificationTypeId = Source.NotificationTypeId

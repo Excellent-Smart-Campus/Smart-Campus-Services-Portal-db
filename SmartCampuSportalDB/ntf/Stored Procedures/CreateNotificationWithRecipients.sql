@@ -33,7 +33,7 @@ SELECT
     [N].[NotificationId]
    ,[N].[SenderId]
    ,[N].[NotificationTypeId]
-   ,[N].Description
+   ,[NT].Description
    ,[N].[SubjectId]
    ,[N].[Message]
    ,[N].[ReferenceId]

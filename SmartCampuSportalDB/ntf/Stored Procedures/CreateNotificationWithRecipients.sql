@@ -1,30 +1,28 @@
 CREATE PROCEDURE [ntf].[CreateNotificationWithRecipients]
-    @senderId	        INT,
+     @senderId	        INT,
     @notificationTypeId	INT,
     @message            VARCHAR(MAX),
     @subjectId	        INT = NULL,
     @referenceId	    INT = NULL,
-    @recipientIds       INT
+    @recipientIds       NVARCHAR(MAX)
 AS
 SET NOCOUNT ON;
 BEGIN TRY
     BEGIN TRANSACTION;
-        INSERT INTO [ntf].[Notification] (SenderId, NotificationTypeId, SubjectId, Message, ReferenceId, DateCreated)
-        VALUES (@senderId, @notificationTypeId, @subjectId, @message, @referenceId, GETDATE());
-            
-        DECLARE @notificationId INT = SCOPE_IDENTITY();
+            INSERT INTO [ntf].[Notification] (SenderId, NotificationTypeId, SubjectId, Message, ReferenceId, DateCreated)
+            VALUES (@senderId, @notificationTypeId, @subjectId, @message, @referenceId, GETDATE());
                 
-        DECLARE @notificationId INT = SCOPE_IDENTITY();
+            DECLARE @notificationId INT = SCOPE_IDENTITY();
             
-        DECLARE @xml XML = CAST('<i>' + REPLACE(@RecipientIds, ',', '</i><i>') + '</i>' AS XML);
+            DECLARE @xml XML = CAST('<i>' + REPLACE(@RecipientIds, ',', '</i><i>') + '</i>' AS XML);
 
-        INSERT INTO [ntf].[NotificationView] (NotificationId, StakeholderId, IsRead, DateCreated)
-        SELECT
-            @notificationId,
-            T.value('.', 'INT'),
-            0,
-            GETDATE()
-        FROM @xml.nodes('/i') AS X(T);
+            INSERT INTO [ntf].[NotificationView] (NotificationId, StakeholderId, IsRead, DateCreated)
+            SELECT
+                @notificationId,
+                T.value('.', 'INT'),
+                0,
+                GETDATE()
+            FROM @xml.nodes('/i') AS X(T);
     COMMIT TRANSACTION;
 END TRY
 BEGIN CATCH

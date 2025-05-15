@@ -9,13 +9,22 @@ AS
 SET NOCOUNT ON;
 BEGIN TRY
     BEGIN TRANSACTION;
-            INSERT INTO [ntf].[Notification] (SenderId, NotificationTypeId, SubjectId, Message, ReferenceId, DateCreated)
-            VALUES (@senderId, @notificationTypeId, @subjectId, @message, @referenceId, GETDATE());
+        INSERT INTO [ntf].[Notification] (SenderId, NotificationTypeId, SubjectId, Message, ReferenceId, DateCreated)
+        VALUES (@senderId, @notificationTypeId, @subjectId, @message, @referenceId, GETDATE());
+            
+        DECLARE @notificationId INT = SCOPE_IDENTITY();
                 
-            DECLARE @notificationId INT = SCOPE_IDENTITY();
-                
-            INSERT INTO [ntf].[NotificationView] (NotificationId, StakeholderId, IsRead, DateCreated)
-            VALUES(@notificationId, @recipientIds, 0, GETDATE())
+        DECLARE @notificationId INT = SCOPE_IDENTITY();
+            
+        DECLARE @xml XML = CAST('<i>' + REPLACE(@RecipientIds, ',', '</i><i>') + '</i>' AS XML);
+
+        INSERT INTO [ntf].[NotificationView] (NotificationId, StakeholderId, IsRead, DateCreated)
+        SELECT
+            @notificationId,
+            T.value('.', 'INT'),
+            0,
+            GETDATE()
+        FROM @xml.nodes('/i') AS X(T);
     COMMIT TRANSACTION;
 END TRY
 BEGIN CATCH

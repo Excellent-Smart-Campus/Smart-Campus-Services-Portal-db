@@ -167,7 +167,8 @@ USING (VALUES
   (3, N'Rejected'),
   (4, N'Open'),
   (5, N'In Progress'),
-  (6, N'Resolved')
+  (6, N'Resolved'),
+  (7, N'Cancelled')
 )
 AS Source (StatusId, Description)
 ON Target.StatusId = Source.StatusId

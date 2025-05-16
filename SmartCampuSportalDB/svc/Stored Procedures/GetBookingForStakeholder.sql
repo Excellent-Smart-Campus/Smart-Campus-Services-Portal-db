@@ -18,4 +18,5 @@ FROM svc.Booking [B]
 INNER JOIN [sh].Stakeholder [S] ON [B].StakeholderId = [S].StakeholderId
 INNER JOIN [svc].[Status] [ST] ON [B].[StatusId] = [ST].StatusId
 WHERE ([B].StakeholderId = @stakeholderId OR [B].LecturerId = @stakeholderId)
-AND ST.StatusId IN (1,2);
+AND ST.StatusId IN (1,2)
+ORDER BY[B].DateCreated DESC;

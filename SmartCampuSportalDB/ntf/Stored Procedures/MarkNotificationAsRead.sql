@@ -7,9 +7,10 @@ BEGIN
     DECLARE @UpdatedRows INT;
 
     UPDATE [ntf].[NotificationView]
-    SET IsRead = 1
+    SET IsRead = 1,
+      DateUpdated = GETDATE()
     WHERE StakeholderId = @stakeholderId
-      AND IsRead = 0;
+    AND IsRead = 0;
 
     SET @UpdatedRows = @@ROWCOUNT;
 

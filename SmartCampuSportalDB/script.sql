@@ -16,6 +16,9 @@ CREATE TABLE [sh].[Stakeholder] (
     [StakeholderId] INT PRIMARY KEY,
     [Name] NVARCHAR(255) NOT NULL,
     [StakeholderTypeId] INT NOT NULL,
+    [IsDeleted]             BIT NULL DEFAULT 0, 
+    [DateCreated]           DATETIME NOT NULL,
+    [DateUpdated]           DATETIME NULL,
     CONSTRAINT [FK_Stakeholder_Type] FOREIGN KEY ([StakeholderTypeId]) REFERENCES [sh].[StakeholderType] ([StakeholderTypeId])
 );
 
@@ -28,7 +31,7 @@ CREATE TABLE [sh].[StakeholderPerson] (
     [StakeholderId]			INT NOT NULL PRIMARY KEY,
     [TitleId]               INT NULL,
     [FirstName]             NVARCHAR (255) NOT NULL,
-    [LastName]              NVARCHAR (255) NOT NULL
+    [LastName]              NVARCHAR (255) NOT NULL,
     CONSTRAINT [FK_StakeholderPerson_Stakeholder] FOREIGN KEY ([StakeholderId]) REFERENCES [sh].[Stakeholder] ([StakeholderId]),
     CONSTRAINT [FK_StakeholderPerson_Title] FOREIGN KEY ([TitleId]) REFERENCES [sh].[Title] ([TitleId])
 );
@@ -67,7 +70,7 @@ CREATE TABLE [sh].[Contact] (
     [AreaCode]          NVARCHAR (32)  NULL,
     CONSTRAINT [PK_Contact] PRIMARY KEY CLUSTERED ([ContactId] ASC),
     CONSTRAINT [FK_Contact_ContactType] FOREIGN KEY ([ContactTypeId]) REFERENCES [sh].[ContactType] ([ContactTypeId]),
-    CONSTRAINT [FK_Contact_Stakeholder] FOREIGN KEY ([StakeholderId]) REFERENCES [sh].[Stakeholder] ([StakeholderId]),
+    CONSTRAINT [FK_Contact_Stakeholder] FOREIGN KEY ([StakeholderId]) REFERENCES [sh].[Stakeholder] ([StakeholderId])
 );
 
 CREATE TABLE [usr].[Action]
@@ -191,11 +194,11 @@ CREATE TABLE [svc].[BookingParticipant] (
 );
 
 CREATE TABLE [edu].[Course] (
-    [StakeholderId]        INT NOT NULL,
+    [CourseId]        INT NOT NULL,
     [CourseCode]           NVARCHAR (255) NOT NULL,
     [CourseName]           NVARCHAR (255) NOT NULL,
     CONSTRAINT [PK_Course] PRIMARY KEY CLUSTERED ([StakeholderId] ASC),
-    CONSTRAINT [FK_Course_Stakeholder] FOREIGN KEY ([StakeholderId]) REFERENCES [sh].[Stakeholder] ([StakeholderId]),
+    CONSTRAINT [FK_Course_Stakeholder] FOREIGN KEY ([CourseId]) REFERENCES [sh].[Stakeholder] ([StakeholderId])
 );
 
 CREATE TABLE [edu].[Subject] (
